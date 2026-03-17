@@ -22,22 +22,22 @@ type PointerState = {
 
 function SwagClimberMark() {
   return (
-    <svg viewBox="0 0 120 110" aria-hidden className="h-20 w-20 text-[#4f2369] sm:h-24 sm:w-24">
-      <g fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.4">
-        <path d="M20 89h26" />
-        <path d="M46 89v-17h14V57h13V40h12" />
-        <path d="M66 16l18 16-16 5-17-16z" />
-        <path d="M72 21l6 15" />
-        <path d="M81 18l5 11" />
-        <path d="M59 30l7 10-5 14" />
-        <path d="M62 54l-10 12" />
-        <path d="M51 66l-10-2-7 10" />
-        <path d="M57 53l14 8" />
-        <path d="M71 61l12 9" />
-        <path d="M81 45l18 12-4 23" />
-        <path d="M64 71v18" />
-        <path d="M52 71v18" />
-        <path d="M36 76l-6 11" />
+    <svg viewBox="0 0 108 102" aria-hidden className="h-14 w-14 text-[#53216b] sm:h-16 sm:w-16">
+      <g fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.2">
+        <path d="M19 83h23" />
+        <path d="M41 83V68h13V54h12V38h11" />
+        <path d="M61 18 79 34 63 39 47 24Z" />
+        <path d="m66 22 6 14" />
+        <path d="m75 19 4 10" />
+        <path d="m52 29 8 10-4 14" />
+        <path d="m59 52-10 12" />
+        <path d="m48 64-10-2-7 10" />
+        <path d="m55 52 14 7" />
+        <path d="m69 59 12 9" />
+        <path d="m79 43 17 12-4 21" />
+        <path d="M61 68v15" />
+        <path d="M50 68v15" />
+        <path d="m35 73-6 10" />
       </g>
     </svg>
   );
@@ -79,40 +79,12 @@ export function Case013SwagworksHeroCard() {
 
   return (
     <main
-      className={`${displayFace.variable} ${bodyFace.variable} min-h-screen overflow-hidden text-[#2c103f]`}
+      className={`${displayFace.variable} ${bodyFace.variable} min-h-screen overflow-hidden text-[#3b1455]`}
       style={{
-        backgroundColor: "#f5eef5",
+        backgroundColor: "#f5eff6",
         fontFamily: "var(--font-case-013-body)",
       }}
     >
-      <style jsx global>{`
-        @keyframes case013Float {
-          0%,
-          100% {
-            transform: translate3d(0, 0, 0);
-          }
-          50% {
-            transform: translate3d(0, -7px, 0);
-          }
-        }
-
-        .case013-float {
-          animation: case013Float 12s cubic-bezier(0.22, 1, 0.36, 1) infinite;
-        }
-
-        @media (prefers-reduced-motion: reduce) {
-          .case013-float {
-            animation: none !important;
-          }
-
-          * {
-            scroll-behavior: auto !important;
-            transition-duration: 0ms !important;
-            animation-duration: 0ms !important;
-          }
-        }
-      `}</style>
-
       <section
         aria-label="How it Works"
         onPointerMove={handlePointerMove}
@@ -124,61 +96,86 @@ export function Case013SwagworksHeroCard() {
           className="absolute inset-0"
           style={{
             background:
-              "radial-gradient(circle at 50% 0%, rgba(255,255,255,0.98) 0%, rgba(255,255,255,0.75) 18%, rgba(255,255,255,0) 42%), linear-gradient(180deg, #f7f1f8 0%, #f5eef5 55%, #f2e9f4 100%)",
+              "radial-gradient(circle at 50% 0%, rgba(255,255,255,0.72) 0%, rgba(255,255,255,0.24) 18%, rgba(255,255,255,0) 42%), linear-gradient(180deg, #f7f1f8 0%, #f5eef5 58%, #f3edf5 100%)",
           }}
         />
 
         <div
           aria-hidden
-          className="absolute left-1/2 top-[15%] h-[16rem] w-[32rem] max-w-[90vw] -translate-x-1/2 rounded-full blur-3xl"
-          style={{
-            background: "radial-gradient(circle, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0) 72%)",
-          }}
+          className="absolute left-1/2 top-1/2 h-[32rem] w-[32rem] max-w-[92vw] -translate-x-1/2 -translate-y-1/2 rounded-full blur-[110px]"
+          style={{ background: "rgba(214, 190, 224, 0.42)" }}
         />
 
-        <div className="relative flex w-full max-w-[1380px] items-center justify-center">
-          <h1
-            aria-label="How it Works"
-            className="pointer-events-none absolute left-1/2 top-1/2 z-0 -translate-x-1/2 -translate-y-1/2 select-none whitespace-nowrap text-center text-[clamp(4.75rem,15.5vw,9.75rem)] leading-[0.82] tracking-[-0.1em] text-[#43125f]"
+        <div
+          aria-hidden
+          className="absolute left-[18%] top-[70%] h-[14rem] w-[14rem] rounded-full blur-[90px]"
+          style={{ background: "rgba(238, 198, 213, 0.28)" }}
+        />
+
+        <div className="relative flex w-full max-w-[1400px] items-center justify-center">
+          <div
+            aria-hidden
+            className="pointer-events-none absolute inset-x-[2.5%] top-1/2 z-0 flex -translate-y-1/2 items-center justify-between select-none text-[clamp(5.2rem,12vw,8.6rem)] leading-[0.84] tracking-[-0.09em] text-[#4a1968]"
             style={{
               fontFamily: "var(--font-case-013-display)",
               fontWeight: 900,
-              transform: `translate3d(calc(-50% + ${depthX * -24}px), calc(-50% + ${depthY * -5}px), 0)`,
+              transform: `translate3d(${depthX * -12}px, calc(-50% + ${depthY * -3}px), 0)`,
+              transition: "transform 180ms ease-out",
             }}
           >
-            How it Works
-          </h1>
+            <span>How</span>
+            <span>Works</span>
+          </div>
 
-          <div className="relative z-10 flex items-center justify-center [perspective:1500px]">
+          <span
+            aria-hidden
+            className="pointer-events-none absolute left-1/2 top-1/2 z-0 -translate-y-1/2 select-none text-[clamp(4.4rem,9vw,6.8rem)] leading-[0.84] tracking-[-0.09em] text-[#4a1968]"
+            style={{
+              fontFamily: "var(--font-case-013-display)",
+              fontWeight: 900,
+              transform: `translate3d(calc(-112% + ${depthX * -8}px), calc(-50% + ${depthY * -3}px), 0)`,
+              transition: "transform 180ms ease-out",
+            }}
+          >
+            it
+          </span>
+
+          <h1 className="sr-only">How it Works</h1>
+
+          <div className="relative z-10 flex items-center justify-center [perspective:1400px]">
             <div
               aria-hidden
-              className="absolute left-1/2 top-[86%] h-14 w-[16rem] -translate-x-1/2 rounded-full bg-[#52206b]/14 blur-2xl sm:w-[20rem]"
+              className="absolute left-1/2 top-[89%] h-16 w-[18rem] -translate-x-1/2 rounded-full bg-[#5d2b79]/12 blur-[26px] sm:w-[22rem]"
               style={{
-                transform: `translate3d(calc(-50% + ${depthX * 14}px), ${depthY * 6}px, 0)`,
+                transform: `translate3d(calc(-50% + ${depthX * 8}px), ${depthY * 4}px, 0)`,
+                transition: "transform 180ms ease-out",
               }}
             />
 
             <div
               aria-hidden
-              className="absolute h-[20.8rem] w-[16rem] rounded-[1.9rem] border border-white/70 bg-[rgba(255,255,255,0.7)] shadow-[0_20px_42px_rgba(104,67,130,0.12)] sm:h-[24.8rem] sm:w-[19rem]"
+              className="absolute h-[23rem] w-[18rem] rounded-[2rem] border border-white/60 bg-white/72 shadow-[0_18px_36px_rgba(104,67,130,0.08)] sm:h-[28rem] sm:w-[21rem]"
               style={{
-                transform: `translate3d(${-16 + depthX * 8}px, ${15 + depthY * 4}px, -80px) rotate(-8deg)`,
+                transform: `translate3d(${-16 + depthX * 6}px, ${8 + depthY * 3}px, -40px) rotate(-7deg)`,
+                transition: "transform 180ms ease-out",
               }}
             />
 
             <div
               aria-hidden
-              className="absolute h-[20.8rem] w-[16rem] rounded-[1.9rem] border border-white/85 bg-[rgba(255,255,255,0.88)] shadow-[0_20px_42px_rgba(104,67,130,0.11)] sm:h-[24.8rem] sm:w-[19rem]"
+              className="absolute h-[23rem] w-[18rem] rounded-[2rem] border border-white/74 bg-white/78 shadow-[0_18px_36px_rgba(104,67,130,0.08)] sm:h-[28rem] sm:w-[21rem]"
               style={{
-                transform: `translate3d(${14 + depthX * 10}px, ${6 + depthY * 4}px, -36px) rotate(7deg)`,
+                transform: `translate3d(${14 + depthX * 8}px, ${-2 + depthY * 3}px, -20px) rotate(5deg)`,
+                transition: "transform 180ms ease-out",
               }}
             />
 
             <article
-              className="case013-float relative flex h-[22rem] w-[16.9rem] flex-col rounded-[1.9rem] border border-[#ba90d7]/46 bg-[#c89ce4] px-5 py-5 text-[#361048] shadow-[0_28px_60px_rgba(87,34,113,0.2),inset_0_1px_0_rgba(255,255,255,0.34)] sm:h-[26.2rem] sm:w-[20.1rem] sm:px-6 sm:py-6"
+              className="relative flex h-[24rem] w-[18rem] flex-col rounded-[2rem] border border-[#be9ad7]/60 bg-[#c9a0e6] px-5 py-5 text-[#43145f] shadow-[0_28px_54px_rgba(87,34,113,0.16)] sm:h-[29rem] sm:w-[21rem] sm:px-6 sm:py-6"
               style={{
-                transform: `translate3d(${depthX * 8}px, ${depthY * 6}px, 0) rotate(${-4 + depthX * 2.2}deg) rotateX(${depthY * -3}deg) rotateY(${depthX * 4}deg)`,
+                transform: `translate3d(${depthX * 6}px, ${depthY * 5}px, 0) rotate(${-3.6 + depthX * 1.2}deg) rotateX(${depthY * -1.2}deg) rotateY(${depthX * 1.8}deg)`,
                 transformStyle: "preserve-3d",
+                transition: "transform 180ms ease-out",
               }}
             >
               <div
@@ -186,7 +183,7 @@ export function Case013SwagworksHeroCard() {
                 className="absolute inset-0 rounded-[2rem]"
                 style={{
                   background:
-                    "linear-gradient(180deg, rgba(255,255,255,0.22) 0%, rgba(255,255,255,0.04) 38%, rgba(86,34,112,0.08) 100%)",
+                    "linear-gradient(180deg, rgba(255,255,255,0.22) 0%, rgba(255,255,255,0.04) 34%, rgba(86,34,112,0.05) 100%)",
                 }}
               />
 
@@ -194,11 +191,8 @@ export function Case013SwagworksHeroCard() {
                 <SwagClimberMark />
 
                 <p
-                  className="mt-auto max-w-[11.3ch] text-[clamp(1.65rem,3.8vw,2.85rem)] leading-[0.9] tracking-[-0.085em] text-[#361048]"
-                  style={{
-                    fontFamily: "var(--font-case-013-display)",
-                    fontWeight: 800,
-                  }}
+                  className="mt-auto max-w-[8.1ch] text-[clamp(2.2rem,4vw,3.4rem)] font-[800] leading-[0.88] tracking-[-0.08em] text-[#43145f]"
+                  style={{ fontFamily: "var(--font-case-013-display)" }}
                 >
                   Set up your Swag Spend Account and instantly set up your digital Visa Debit card.
                 </p>
