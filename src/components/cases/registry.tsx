@@ -9,6 +9,7 @@ import { Case010DevAgencyHero } from "@/components/cases/case-010-dev-agency-her
 import { Case011WonSojuSections } from "@/components/cases/case-011-won-soju-sections";
 import { Case012WorthSavingFiles } from "@/components/cases/case-012-worth-saving-files";
 import { Case013SwagworksHeroCard } from "@/components/cases/case-013-swagworks-hero-card";
+import { Case014MarketingTagCluster } from "@/components/cases/case-014-marketing-tag-cluster";
 
 const caseRegistry: Record<string, () => React.ReactNode> = {
   "case-001-beginning": () => <Case001Beginning />,
@@ -22,6 +23,7 @@ const caseRegistry: Record<string, () => React.ReactNode> = {
   "case-011-won-soju-sections": () => <Case011WonSojuSections />,
   "case-012-worth-saving-files": () => <Case012WorthSavingFiles />,
   "case-013-swagworks-hero-card": () => <Case013SwagworksHeroCard />,
+  "case-014-marketing-tag-cluster": () => <Case014MarketingTagCluster />,
 };
 
 export function renderCase(slug: string) {
