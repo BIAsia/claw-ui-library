@@ -4,8 +4,6 @@ import { Case003JulieDoucet } from "@/components/cases/case-003-julie-doucet";
 import { Case004BoookinShop } from "@/components/cases/case-004-boookin-shop";
 import { Case005SelfEsteemEditorial } from "@/components/cases/case-005-self-esteem-editorial";
 import { Case006DeSchoolGrid } from "@/components/cases/case-006-de-school-grid";
-import { Case007YaleRedesign } from "@/components/cases/case-007-yale-redesign";
-import { Case008ArtSpacePhone } from "@/components/cases/case-008-art-space-phone";
 import { Case010DevAgencyHero } from "@/components/cases/case-010-dev-agency-hero";
 import { Case012WorthSavingFiles } from "@/components/cases/case-012-worth-saving-files";
 import { Case013SwagworksHeroCard } from "@/components/cases/case-013-swagworks-hero-card";
@@ -17,8 +15,6 @@ const caseRegistry: Record<string, () => React.ReactNode> = {
   "case-004-boookin-shop": () => <Case004BoookinShop />,
   "case-005-self-esteem-editorial": () => <Case005SelfEsteemEditorial />,
   "case-006-de-school-grid": () => <Case006DeSchoolGrid />,
-  "case-007-yale-redesign": () => <Case007YaleRedesign />,
-  "case-008-art-space-phone": () => <Case008ArtSpacePhone />,
   "case-010-dev-agency-hero": () => <Case010DevAgencyHero />,
   "case-012-worth-saving-files": () => <Case012WorthSavingFiles />,
   "case-013-swagworks-hero-card": () => <Case013SwagworksHeroCard />,
