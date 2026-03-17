@@ -10,6 +10,16 @@ import { Case011WonSojuSections } from "@/components/cases/case-011-won-soju-sec
 import { Case012WorthSavingFiles } from "@/components/cases/case-012-worth-saving-files";
 import { Case013SwagworksHeroCard } from "@/components/cases/case-013-swagworks-hero-card";
 import { Case014MarketingTagCluster } from "@/components/cases/case-014-marketing-tag-cluster";
+import { Case015ImpactCampaignCard } from "@/components/cases/case-015-impact-campaign-card";
+import { Case016CashlessAdoptionDots } from "@/components/cases/case-016-cashless-adoption-dots";
+import { Case017CircuitIdentityCards } from "@/components/cases/case-017-circuit-identity-cards";
+import { Case018MuxSignalGrid } from "@/components/cases/case-018-mux-signal-grid";
+import { Case019BBBankMobileDashboard } from "@/components/cases/case-019-bbbank-mobile-dashboard";
+import { Case020RadinalPixelFont } from "@/components/cases/case-020-radinal-pixel-font";
+import { Case021CygnitoMonoPoster } from "@/components/cases/case-021-cygnito-mono-poster";
+import { Case022MercatError404 } from "@/components/cases/case-022-mercat-error-404";
+import { Case023CookieCutterPoster } from "@/components/cases/case-023-cookie-cutter-poster";
+import { Case024RadiiioStationTable } from "@/components/cases/case-024-radiiio-station-table";
 
 const caseRegistry: Record<string, () => React.ReactNode> = {
   "case-001-beginning": () => <Case001Beginning />,
@@ -24,6 +34,16 @@ const caseRegistry: Record<string, () => React.ReactNode> = {
   "case-012-worth-saving-files": () => <Case012WorthSavingFiles />,
   "case-013-swagworks-hero-card": () => <Case013SwagworksHeroCard />,
   "case-014-marketing-tag-cluster": () => <Case014MarketingTagCluster />,
+  "case-015-impact-campaign-card": () => <Case015ImpactCampaignCard />,
+  "case-016-cashless-adoption-dots": () => <Case016CashlessAdoptionDots />,
+  "case-017-circuit-identity-cards": () => <Case017CircuitIdentityCards />,
+  "case-018-mux-signal-grid": () => <Case018MuxSignalGrid />,
+  "case-019-bbbank-mobile-dashboard": () => <Case019BBBankMobileDashboard />,
+  "case-020-radinal-pixel-font": () => <Case020RadinalPixelFont />,
+  "case-021-cygnito-mono-poster": () => <Case021CygnitoMonoPoster />,
+  "case-022-mercat-error-404": () => <Case022MercatError404 />,
+  "case-023-cookie-cutter-poster": () => <Case023CookieCutterPoster />,
+  "case-024-radiiio-station-table": () => <Case024RadiiioStationTable />,
 };
 
 export function renderCase(slug: string) {
