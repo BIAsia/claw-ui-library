@@ -19,8 +19,6 @@ const serifFace = Cormorant_Garamond({
 type PointerState = {
   x: number;
   y: number;
-  rotateX: number;
-  rotateY: number;
 };
 
 type BoatSpec = {
@@ -166,179 +164,164 @@ function FeaturedItem({
 }
 
 export function Case005SelfEsteemEditorial() {
-  const [pointer, setPointer] = useState<PointerState>({ x: 0.5, y: 0.44, rotateX: 0, rotateY: 0 });
+  const [pointer, setPointer] = useState<PointerState>({ x: 0.5, y: 0.44 });
   const [hovered, setHovered] = useState(false);
   const [activeArticle, setActiveArticle] = useState(0);
 
   return (
     <main
-      className={`${sansFace.variable} ${serifFace.variable} flex min-h-screen items-center justify-center overflow-hidden bg-[#17181d] px-4 py-6 text-[#111111] sm:px-6 lg:px-10`}
+      className={`${sansFace.variable} ${serifFace.variable} relative min-h-screen overflow-hidden bg-[#ebe7e0] text-[#111111]`}
       style={{ fontFamily: "var(--font-case-005-sans)" }}
     >
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_14%,rgba(255,255,255,0.08),transparent_26%),linear-gradient(180deg,#17181d_0%,#111217_100%)]" />
-      <div className="pointer-events-none absolute inset-0 opacity-30 [background-image:linear-gradient(rgba(255,255,255,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.05)_1px,transparent_1px)] [background-size:72px_72px] [mask-image:radial-gradient(circle_at_center,black,transparent_82%)]" />
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_-10%,rgba(255,255,255,0.7),transparent_32%),linear-gradient(180deg,#f1ede7_0%,#ebe7e0_36%,#e7e2db_100%)]" />
+      <div className="pointer-events-none absolute inset-0 opacity-[0.16] mix-blend-multiply [background-image:radial-gradient(circle_at_1px_1px,rgba(22,22,22,0.3)_1px,transparent_0)] [background-size:12px_12px]" />
+      <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-black/10" />
 
       <section
-        className="relative mx-auto w-full max-w-[1320px]"
-        style={{ perspective: 2200 }}
+        className="relative mx-auto min-h-screen w-full max-w-[1580px] px-4 sm:px-6 lg:px-8"
         onPointerEnter={() => setHovered(true)}
         onPointerLeave={() => {
           setHovered(false);
-          setPointer({ x: 0.5, y: 0.44, rotateX: 0, rotateY: 0 });
+          setPointer({ x: 0.5, y: 0.44 });
         }}
         onPointerMove={(event) => {
           const rect = event.currentTarget.getBoundingClientRect();
           const x = (event.clientX - rect.left) / rect.width;
           const y = (event.clientY - rect.top) / rect.height;
 
-          setPointer({
-            x,
-            y,
-            rotateX: (0.5 - y) * 5.5,
-            rotateY: (x - 0.5) * 7,
-          });
+          setPointer({ x, y });
         }}
       >
         <div
-          className="relative overflow-hidden rounded-[1.75rem] border border-white/7 bg-[#ebe7e0] shadow-[0_35px_120px_rgba(0,0,0,0.42)] transition-transform duration-300 ease-[cubic-bezier(0.22,1,0.36,1)]"
+          aria-hidden
+          className="pointer-events-none absolute inset-x-[8%] top-[8%] h-[18rem] opacity-70 blur-3xl transition duration-300"
           style={{
-            transform: `rotateX(${pointer.rotateX}deg) rotateY(${pointer.rotateY}deg)`,
-            transformStyle: "preserve-3d",
+            background: `radial-gradient(circle at ${pointer.x * 100}% ${pointer.y * 100}%, rgba(255,255,255,0.38), transparent 24%)`,
           }}
-        >
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_12%_8%,rgba(255,255,255,0.58),transparent_20%),linear-gradient(180deg,rgba(255,255,255,0.16),transparent_14%,transparent_84%,rgba(255,255,255,0.12))]" />
-          <div className="absolute inset-0 opacity-[0.14] mix-blend-multiply [background-image:radial-gradient(circle_at_1px_1px,rgba(22,22,22,0.35)_1px,transparent_0)] [background-size:12px_12px]" />
-          <div
-            aria-hidden
-            className="pointer-events-none absolute -inset-[12%] opacity-90 blur-3xl transition duration-300"
-            style={{
-              background: `radial-gradient(circle at ${pointer.x * 100}% ${pointer.y * 100}%, rgba(255,255,255,0.28), transparent 22%)`,
-            }}
-          />
+        />
 
-          <div className="relative grid min-h-[720px] grid-cols-1 lg:grid-cols-[0.88fr_2.85fr_1.62fr]">
-            <aside className="flex flex-col justify-between border-b border-black/12 px-6 py-6 sm:px-8 lg:min-h-[720px] lg:border-b-0 lg:border-r lg:px-6 lg:py-5 xl:px-8">
-              <nav aria-label="Primary" className="flex flex-col gap-3 text-[1.08rem] tracking-[-0.03em] text-[#151515]">
-                {navigation.map((item) => (
-                  <a
-                    key={item}
-                    href="#article"
-                    className="inline-flex w-fit items-center gap-2 text-[#151515]/92 transition duration-300 hover:translate-x-1 hover:text-[#000000] focus-visible:translate-x-1 focus-visible:text-[#000000] focus-visible:outline-none"
-                  >
-                    <span>{item}</span>
-                  </a>
-                ))}
-              </nav>
-
-              <div className="mt-12 flex flex-col gap-2 text-[1.08rem] tracking-[-0.03em] text-[#161616] lg:mt-8">
-                <a href="#article" className="w-fit transition hover:translate-x-1 focus-visible:translate-x-1 focus-visible:outline-none">
-                  @MagazineDope
-                </a>
-                <a href="#subscribe" className="flex w-fit items-center gap-2 transition hover:translate-x-1 focus-visible:translate-x-1 focus-visible:outline-none">
-                  <span className="inline-flex h-3 w-3 bg-[#141414]" />
-                  <span>Subscribe</span>
-                </a>
-              </div>
-            </aside>
-
-            <section className="flex flex-col border-b border-black/12 px-6 py-6 sm:px-8 lg:min-h-[720px] lg:border-b-0 lg:border-r lg:px-5 lg:py-5 xl:px-7">
-              <header>
-                <div className="flex flex-col gap-4 border-b border-black/12 pb-4 md:flex-row md:items-end md:justify-between md:gap-8">
-                  <h1 className="text-[clamp(3.6rem,8vw,7rem)] font-extrabold leading-[0.9] tracking-[-0.09em] text-[#0f0f0f]">
-                    Self Esteem
-                  </h1>
-                  <p className="pb-2 text-[1rem] tracking-[-0.03em] text-[#161616]/82">12.06.2021</p>
-                </div>
-
-                <div className="flex items-center gap-3 py-3 text-[1rem] tracking-[-0.035em] text-[#161616]">
-                  <span className="h-2.5 w-2.5 rounded-full bg-[#111111]" />
-                  <span>Pinned Issue</span>
-                </div>
-              </header>
-
-              <article id="article" className="grid flex-1 grid-rows-[auto_auto_1fr_auto] pt-3">
-                <div className="grid grid-cols-1 gap-5 lg:grid-cols-[1.1fr_1fr]">
-                  <div className="hidden lg:block" aria-hidden />
-                  <div className="relative">
-                    <ScenicImage pointer={pointer} hovered={hovered} />
-                  </div>
-                </div>
-
-                <div className="grid grid-cols-1 gap-5 pt-2 lg:grid-cols-[1.1fr_1fr]">
-                  <div className="hidden lg:block" aria-hidden />
-                  <div className="space-y-2.5">
-                    <h2 className="max-w-[16ch] text-[clamp(1.65rem,2.4vw,2.35rem)] font-semibold leading-[0.94] tracking-[-0.065em] text-[#101010]">
-                      Sharing The <span style={{ fontFamily: "var(--font-case-005-serif)", fontStyle: "italic", fontWeight: 600 }}>Widespread</span>
-                      <br />
-                      Acclaim About Motivation
-                    </h2>
-
-                    <div className="flex flex-wrap items-center justify-between gap-3 text-[0.95rem] tracking-[-0.025em] text-[#161616]/76">
-                      <p>
-                        By <span className="font-medium text-[#111111]">Ricard Carrington</span>
-                      </p>
-                      <p style={{ fontFamily: "var(--font-case-005-serif)", fontStyle: "italic" }}>5 Min Read</p>
-                    </div>
-
-                    <p className="max-w-[38ch] text-[0.99rem] leading-[1.4] tracking-[-0.02em] text-[#161616]/84">
-                      Blonde received widespread acclaim, with critics praising Ocean&apos;s introspective lyrics and the album&apos;s unconventional restraint.
-                    </p>
-                  </div>
-                </div>
-
-                <div className="mt-8 flex items-end justify-between gap-6 border-t border-black/12 pt-5">
-                  <div>
-                    <p className="text-[clamp(3.2rem,7vw,5.2rem)] font-medium leading-none tracking-[-0.11em] text-[#111111]">
-                      NO.01
-                    </p>
-                  </div>
-
-                  <a
-                    href="#featured"
-                    className="group inline-flex items-center gap-3 self-end text-[1.1rem] tracking-[-0.04em] text-[#141414] transition duration-300 hover:-translate-y-0.5 focus-visible:-translate-y-0.5 focus-visible:outline-none"
-                  >
-                    <span className="text-[1.18rem] transition duration-300 group-hover:-rotate-12 group-focus-visible:-rotate-12">↳</span>
-                    <span>See More</span>
-                  </a>
-                </div>
-              </article>
-            </section>
-
-            <aside id="featured" className="flex flex-col px-6 py-6 sm:px-8 lg:min-h-[720px] lg:px-5 lg:py-5 xl:px-7">
-              <div className="relative mb-9 h-6 overflow-hidden bg-[#121212]">
-                <div className="absolute inset-y-0 right-0 flex items-center pr-2">
-                  <span className="case005-dot h-2.5 w-2.5 rounded-full bg-[#ebe7e0]" />
-                </div>
-              </div>
-
-              <div className="flex items-center justify-between gap-4 border-b border-black/12 pb-3">
-                <p
-                  className="text-[1.45rem] leading-none tracking-[-0.04em] text-[#141414]"
-                  style={{ fontFamily: "var(--font-case-005-serif)", fontStyle: "italic", fontWeight: 500 }}
-                >
-                  Featured Articles
-                </p>
+        <div className="relative grid min-h-screen grid-cols-1 lg:grid-cols-[11.5rem_minmax(0,1fr)_22rem] xl:grid-cols-[12rem_minmax(0,1fr)_23rem]">
+          <aside className="flex flex-col justify-between border-b border-black/12 py-6 lg:border-r lg:border-b-0 lg:py-9">
+            <nav aria-label="Primary" className="flex flex-col gap-3 pr-4 text-[1.08rem] tracking-[-0.03em] text-[#151515] lg:pr-6">
+              {navigation.map((item) => (
                 <a
+                  key={item}
                   href="#article"
-                  className="inline-flex items-center gap-3 text-[1rem] tracking-[-0.03em] text-[#111111] transition hover:translate-x-1 focus-visible:translate-x-1 focus-visible:outline-none"
+                  className="inline-flex w-fit items-center gap-2 text-[#151515]/92 transition duration-300 hover:translate-x-1 hover:text-[#000000] focus-visible:translate-x-1 focus-visible:text-[#000000] focus-visible:outline-none"
                 >
-                  <span className="h-2.5 w-2.5 rounded-full bg-[#111111]" />
-                  <span>See All</span>
+                  <span>{item}</span>
                 </a>
+              ))}
+            </nav>
+
+            <div className="mt-10 flex flex-col gap-2 pr-4 text-[1.08rem] tracking-[-0.03em] text-[#161616] lg:mt-8 lg:pr-6">
+              <a href="#article" className="w-fit transition hover:translate-x-1 focus-visible:translate-x-1 focus-visible:outline-none">
+                @MagazineDope
+              </a>
+              <a href="#subscribe" className="flex w-fit items-center gap-2 transition hover:translate-x-1 focus-visible:translate-x-1 focus-visible:outline-none">
+                <span className="inline-flex h-3 w-3 bg-[#141414]" />
+                <span>Subscribe</span>
+              </a>
+            </div>
+          </aside>
+
+          <section className="flex min-h-full flex-col border-b border-black/12 py-6 lg:border-r lg:border-b-0 lg:px-4 lg:py-9 xl:px-6">
+            <header>
+              <div className="flex flex-col gap-4 border-b border-black/12 pb-4 md:flex-row md:items-end md:justify-between md:gap-8">
+                <h1 className="max-w-[11ch] text-[clamp(4rem,8vw,7.65rem)] font-extrabold leading-[0.88] tracking-[-0.095em] text-[#0f0f0f]">
+                  Self Esteem
+                </h1>
+                <p className="pb-2 text-[1rem] tracking-[-0.03em] text-[#161616]/82">12.06.2021</p>
               </div>
 
-              <div className="flex flex-1 flex-col justify-start pt-2">
-                {featuredArticles.map((article, index) => (
-                  <FeaturedItem
-                    key={article.number}
-                    article={article}
-                    active={activeArticle === index}
-                    onEnter={() => setActiveArticle(index)}
-                  />
-                ))}
+              <div className="flex items-center gap-3 py-3 text-[1rem] tracking-[-0.035em] text-[#161616]">
+                <span className="h-2.5 w-2.5 rounded-full bg-[#111111]" />
+                <span>Pinned Issue</span>
               </div>
-            </aside>
-          </div>
+            </header>
+
+            <article id="article" className="grid flex-1 grid-rows-[auto_auto_1fr_auto] pt-3">
+              <div className="grid grid-cols-1 gap-5 lg:grid-cols-[minmax(14rem,1.04fr)_minmax(18rem,1fr)] lg:items-start">
+                <div className="hidden lg:block" aria-hidden />
+                <div className="relative">
+                  <ScenicImage pointer={pointer} hovered={hovered} />
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 gap-5 pt-4 lg:grid-cols-[minmax(14rem,1.04fr)_minmax(18rem,1fr)]">
+                <div className="hidden lg:block" aria-hidden />
+                <div className="space-y-2.5">
+                  <h2 className="max-w-[16ch] text-[clamp(1.75rem,2.5vw,2.45rem)] font-semibold leading-[0.94] tracking-[-0.065em] text-[#101010]">
+                    Sharing The <span style={{ fontFamily: "var(--font-case-005-serif)", fontStyle: "italic", fontWeight: 600 }}>Widespread</span>
+                    <br />
+                    Acclaim About Motivation
+                  </h2>
+
+                  <div className="flex flex-wrap items-center justify-between gap-3 text-[0.95rem] tracking-[-0.025em] text-[#161616]/76">
+                    <p>
+                      By <span className="font-medium text-[#111111]">Ricard Carrington</span>
+                    </p>
+                    <p style={{ fontFamily: "var(--font-case-005-serif)", fontStyle: "italic" }}>5 Min Read</p>
+                  </div>
+
+                  <p className="max-w-[38ch] text-[0.99rem] leading-[1.4] tracking-[-0.02em] text-[#161616]/84">
+                    Blonde received widespread acclaim, with critics praising Ocean&apos;s introspective lyrics and the album&apos;s unconventional restraint.
+                  </p>
+                </div>
+              </div>
+
+              <div className="mt-10 flex items-end justify-between gap-6 border-t border-black/12 pt-6">
+                <div>
+                  <p className="text-[clamp(3.8rem,7vw,6rem)] font-medium leading-none tracking-[-0.11em] text-[#111111]">
+                    NO.01
+                  </p>
+                </div>
+
+                <a
+                  href="#featured"
+                  className="group inline-flex items-center gap-3 self-end text-[1.1rem] tracking-[-0.04em] text-[#141414] transition duration-300 hover:-translate-y-0.5 focus-visible:-translate-y-0.5 focus-visible:outline-none"
+                >
+                  <span className="text-[1.18rem] transition duration-300 group-hover:-rotate-12 group-focus-visible:-rotate-12">↳</span>
+                  <span>See More</span>
+                </a>
+              </div>
+            </article>
+          </section>
+
+          <aside id="featured" className="flex flex-col py-6 lg:py-9 lg:pl-4 xl:pl-6">
+            <div className="relative mb-9 h-6 overflow-hidden bg-[#121212]">
+              <div className="absolute inset-y-0 right-0 flex items-center pr-2">
+                <span className="case005-dot h-2.5 w-2.5 rounded-full bg-[#ebe7e0]" />
+              </div>
+            </div>
+
+            <div className="flex items-center justify-between gap-4 border-b border-black/12 pb-3">
+              <p
+                className="text-[1.45rem] leading-none tracking-[-0.04em] text-[#141414]"
+                style={{ fontFamily: "var(--font-case-005-serif)", fontStyle: "italic", fontWeight: 500 }}
+              >
+                Featured Articles
+              </p>
+              <a
+                href="#article"
+                className="inline-flex items-center gap-3 text-[1rem] tracking-[-0.03em] text-[#111111] transition hover:translate-x-1 focus-visible:translate-x-1 focus-visible:outline-none"
+              >
+                <span className="h-2.5 w-2.5 rounded-full bg-[#111111]" />
+                <span>See All</span>
+              </a>
+            </div>
+
+            <div className="flex flex-1 flex-col justify-start pt-2">
+              {featuredArticles.map((article, index) => (
+                <FeaturedItem
+                  key={article.number}
+                  article={article}
+                  active={activeArticle === index}
+                  onEnter={() => setActiveArticle(index)}
+                />
+              ))}
+            </div>
+          </aside>
         </div>
       </section>
 
