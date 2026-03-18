@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import { Barlow_Condensed, Instrument_Sans } from "next/font/google";
 
 const displayFace = Barlow_Condensed({
@@ -149,6 +149,11 @@ const roomLayers: RoomLayer[] = [
 
 const tracks: Track[] = ["All", "Club", "Talk", "Live", "Screen"];
 
+function getVisibleSessions(track: Track) {
+  if (track === "All") return sessions;
+  return sessions.filter((session) => session.track === track);
+}
+
 function QueueRow({
   session,
   active,
@@ -258,16 +263,17 @@ export function Case006DeSchoolGrid() {
   const [email, setEmail] = useState("");
   const [joined, setJoined] = useState(false);
 
-  const visibleSessions = useMemo(() => {
-    if (activeTrack === "All") return sessions;
-    return sessions.filter((session) => session.track === activeTrack);
-  }, [activeTrack]);
+  const visibleSessions = useMemo(() => getVisibleSessions(activeTrack), [activeTrack]);
 
-  useEffect(() => {
-    if (!visibleSessions.some((session) => session.id === activeId)) {
-      setActiveId(visibleSessions[0]?.id ?? sessions[0].id);
+  const handleTrackChange = (track: Track) => {
+    const nextVisibleSessions = getVisibleSessions(track);
+
+    setActiveTrack(track);
+
+    if (!nextVisibleSessions.some((session) => session.id === activeId)) {
+      setActiveId(nextVisibleSessions[0]?.id ?? sessions[0].id);
     }
-  }, [activeId, visibleSessions]);
+  };
 
   const activeSession =
     visibleSessions.find((session) => session.id === activeId) ??
@@ -344,7 +350,7 @@ export function Case006DeSchoolGrid() {
                       <button
                         key={track}
                         type="button"
-                        onClick={() => setActiveTrack(track)}
+                        onClick={() => handleTrackChange(track)}
                         className={`border px-3 py-1.5 text-[0.58rem] uppercase tracking-[0.18em] transition ${activeTrack === track ? "border-black bg-black text-[#f4f0e8]" : "border-black/15 bg-[#fbf8f2] text-[#11110f] hover:border-black/55"}`}
                       >
                         {track}
