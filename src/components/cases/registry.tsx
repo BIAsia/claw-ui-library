@@ -20,6 +20,11 @@ import { Case021CygnitoMonoPoster } from "@/components/cases/case-021-cygnito-mo
 import { Case022MercatError404 } from "@/components/cases/case-022-mercat-error-404";
 import { Case023CookieCutterPoster } from "@/components/cases/case-023-cookie-cutter-poster";
 import { Case024RadiiioStationTable } from "@/components/cases/case-024-radiiio-station-table";
+import { Case025DadFestivalTabs } from "@/components/cases/case-025-dad-festival-tabs";
+import { Case026IdeasChangeCards } from "@/components/cases/case-026-ideas-change-cards";
+import { Case027GdanskLiteratureSystem } from "@/components/cases/case-027-gdansk-literature-system";
+import { Case028UkrainianPowerHero } from "@/components/cases/case-028-ukrainian-power-hero";
+import { Case029ZinaGalleryPoster } from "@/components/cases/case-029-zina-gallery-poster";
 
 const caseRegistry: Record<string, () => React.ReactNode> = {
   "case-001-beginning": () => <Case001Beginning />,
@@ -44,6 +49,11 @@ const caseRegistry: Record<string, () => React.ReactNode> = {
   "case-022-mercat-error-404": () => <Case022MercatError404 />,
   "case-023-cookie-cutter-poster": () => <Case023CookieCutterPoster />,
   "case-024-radiiio-station-table": () => <Case024RadiiioStationTable />,
+  "case-025-dad-festival-tabs": () => <Case025DadFestivalTabs />,
+  "case-026-ideas-change-cards": () => <Case026IdeasChangeCards />,
+  "case-027-gdansk-literature-system": () => <Case027GdanskLiteratureSystem />,
+  "case-028-ukrainian-power-hero": () => <Case028UkrainianPowerHero />,
+  "case-029-zina-gallery-poster": () => <Case029ZinaGalleryPoster />,
 };
 
 export function renderCase(slug: string) {
