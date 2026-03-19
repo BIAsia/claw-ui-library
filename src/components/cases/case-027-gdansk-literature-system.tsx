@@ -35,13 +35,13 @@ function Poster({
         };
 
   return (
-    <article className="relative aspect-[0.67] overflow-hidden px-5 py-4" style={{ background: bg }}>
-      <div className={shapes.a} style={{ background: accentA }} />
-      <div className={shapes.b} style={{ background: accentB }} />
-      <div className={shapes.c} style={{ background: accentC }} />
-      <div className={shapes.d} style={{ background: variant === "pink" ? "#506fba" : "#e3b6d5" }} />
+    <article className="group relative aspect-[0.67] overflow-hidden px-5 py-4 transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] motion-safe:hover:-translate-y-1.5" style={{ background: bg }}>
+      <div className={`${shapes.a} transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] motion-safe:group-hover:-translate-y-1 motion-safe:group-hover:-rotate-[8deg]`} style={{ background: accentA }} />
+      <div className={`${shapes.b} transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] motion-safe:group-hover:translate-x-1 motion-safe:group-hover:rotate-[3deg]`} style={{ background: accentB }} />
+      <div className={`${shapes.c} transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] motion-safe:group-hover:-translate-x-1 motion-safe:group-hover:rotate-[-40deg]`} style={{ background: accentC }} />
+      <div className={`${shapes.d} transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] motion-safe:group-hover:translate-y-1 motion-safe:group-hover:rotate-[3deg]`} style={{ background: variant === "pink" ? "#506fba" : "#e3b6d5" }} />
 
-      <div className={shapes.block}>
+      <div className={`${shapes.block} transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] motion-safe:group-hover:translate-y-[2px]`}>
         <div className={`relative z-10 ${shapes.text}`} style={{ color: titleColor }}>
           New Senses of Sentences. Gdańsk Meetings of Literary Programmers
         </div>
@@ -67,7 +67,7 @@ function Poster({
 
 function TallTextCard({ bg, color }: { bg: string; color: string }) {
   return (
-    <article className="relative min-h-[118px] overflow-hidden px-4 py-3" style={{ background: bg, color }}>
+    <article className="group relative min-h-[118px] overflow-hidden px-4 py-3 transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] motion-safe:hover:-translate-y-1" style={{ background: bg, color }}>
       <p className="max-w-[8ch] text-[clamp(1.25rem,1.95vw,2.4rem)] leading-[0.9] font-normal tracking-[-0.075em]">
         Nowe zadania zdań. Gdańskie spotkania programistów literatury
       </p>
@@ -87,7 +87,7 @@ function TallTextCard({ bg, color }: { bg: string; color: string }) {
 
 function InviteCard() {
   return (
-    <article className="relative rotate-[-8deg] overflow-hidden border border-black/30 bg-[#ffef09] px-4 py-3 text-black shadow-[0_12px_18px_rgba(0,0,0,0.18)]">
+    <article className="relative rotate-[-8deg] overflow-hidden border border-black/30 bg-[#ffef09] px-4 py-3 text-black shadow-[0_12px_18px_rgba(0,0,0,0.18)] transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] motion-safe:hover:translate-y-[-4px] motion-safe:hover:rotate-[-10deg]">
       <div className="ml-auto max-w-[8ch] text-[0.34rem] uppercase leading-[1.1] tracking-[0.08em] text-black/80 sm:text-[0.42rem]">
         Międzynarodowe spotkanie organizatorów wydarzeń literackich
       </div>
@@ -100,7 +100,7 @@ function InviteCard() {
 
 function LetterCard() {
   return (
-    <article className="relative rotate-[6deg] overflow-hidden border border-black/25 bg-[#efbfd7] px-4 py-4 text-black shadow-[0_14px_18px_rgba(0,0,0,0.22)]">
+    <article className="relative rotate-[6deg] overflow-hidden border border-black/25 bg-[#efbfd7] px-4 py-4 text-black shadow-[0_14px_18px_rgba(0,0,0,0.22)] transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] motion-safe:hover:translate-y-[-4px] motion-safe:hover:rotate-[4deg]">
       <p className="text-[0.92rem] leading-[1.04] tracking-[-0.04em] sm:text-[1.02rem]">
         Szanowny Panie serdecznie zapraszam do udziału w międzynarodowym spotkaniu organizatorów wydarzeń literackich, które odbędzie się w dniach 1–3 czerwca br., przy Długiej 35.
       </p>
@@ -111,7 +111,7 @@ function LetterCard() {
 
 function GreenTiltCard() {
   return (
-    <article className="relative min-h-[196px] rotate-[24deg] overflow-hidden bg-[#58be77] px-4 py-4 text-[#4d6fbb] shadow-[0_16px_28px_rgba(0,0,0,0.22)]">
+    <article className="relative min-h-[196px] rotate-[24deg] overflow-hidden bg-[#58be77] px-4 py-4 text-[#4d6fbb] shadow-[0_16px_28px_rgba(0,0,0,0.22)] transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] motion-safe:hover:translate-y-[-5px] motion-safe:hover:rotate-[21deg]">
       <p className="ml-[32%] mt-11 max-w-[7ch] text-[clamp(1.32rem,1.85vw,2.1rem)] leading-[0.9] font-normal tracking-[-0.08em]">
         Nowe zadania zdań. Gdańskie spotkania programistów literatury
       </p>
@@ -121,7 +121,7 @@ function GreenTiltCard() {
 
 function SpeakerCard({ bg, name, accent }: { bg: string; name: string; accent: string }) {
   return (
-    <article className="relative aspect-[2.18] overflow-hidden" style={{ background: bg }}>
+    <article className="group relative aspect-[2.18] overflow-hidden transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] motion-safe:hover:-translate-y-1" style={{ background: bg }}>
       <div className="absolute left-[11%] top-[17%] h-[65%] w-[22%] overflow-hidden bg-[#ececec]">
         <div className="h-full w-full bg-[linear-gradient(135deg,#111_0%,#666_38%,#e6e6e6_60%,#1a1a1a_100%)]" />
       </div>

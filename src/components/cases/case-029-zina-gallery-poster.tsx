@@ -21,9 +21,9 @@ export function Case029ZinaGalleryPoster() {
   return (
     <main className="min-h-screen bg-[#0a160b] px-3 py-3 text-white sm:px-5 lg:px-8">
       <section className="mx-auto flex min-h-[calc(100vh-1.5rem)] max-w-[860px] items-center justify-center">
-        <article className="relative aspect-[0.712] w-full overflow-hidden bg-[#1f9b43] px-[4.3%] py-[3.2%] shadow-[0_32px_80px_rgba(0,0,0,0.36)]">
-          <div className="absolute inset-0 opacity-[0.12] mix-blend-screen [background-image:radial-gradient(circle_at_15%_18%,rgba(255,255,255,0.65),transparent_18%),radial-gradient(circle_at_80%_22%,rgba(255,255,255,0.25),transparent_26%),radial-gradient(circle_at_60%_70%,rgba(255,255,255,0.18),transparent_22%)]" />
-          <div className="absolute inset-0 opacity-[0.15] [background-image:linear-gradient(rgba(255,255,255,0.18)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.18)_1px,transparent_1px)] [background-size:100%_24.8%,50%_100%]" />
+        <article className="group relative aspect-[0.712] w-full overflow-hidden bg-[#1f9b43] px-[4.3%] py-[3.2%] shadow-[0_32px_80px_rgba(0,0,0,0.36)] transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] motion-safe:hover:-translate-y-1 motion-safe:hover:shadow-[0_40px_96px_rgba(0,0,0,0.42)]">
+          <div className="absolute inset-0 opacity-[0.12] mix-blend-screen transition-opacity duration-700 motion-safe:group-hover:opacity-[0.18] [background-image:radial-gradient(circle_at_15%_18%,rgba(255,255,255,0.65),transparent_18%),radial-gradient(circle_at_80%_22%,rgba(255,255,255,0.25),transparent_26%),radial-gradient(circle_at_60%_70%,rgba(255,255,255,0.18),transparent_22%)]" />
+          <div className="absolute inset-0 opacity-[0.15] transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] motion-safe:group-hover:translate-y-[-2px] [background-image:linear-gradient(rgba(255,255,255,0.18)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.18)_1px,transparent_1px)] [background-size:100%_24.8%,50%_100%]" />
           <div className="absolute inset-y-0 left-1/2 w-px -translate-x-1/2 bg-white/55" />
           <div className="absolute inset-x-0 top-[24.8%] h-px bg-white/55" />
           <div className="absolute inset-x-0 top-[49.6%] h-px bg-white/55" />
@@ -31,7 +31,7 @@ export function Case029ZinaGalleryPoster() {
 
           <div className="relative z-10 flex h-full flex-col">
             <MetaRow />
-            <div className="mt-[3.8%] border-t border-white/80 pt-[2.2%]">
+            <div className="mt-[3.8%] border-t border-white/80 pt-[2.2%] transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] motion-safe:group-hover:translate-y-[2px]">
               <h1 className="max-w-[9ch] text-[clamp(2.4rem,5vw,4.4rem)] leading-[0.9] font-semibold tracking-[-0.09em] text-white">
                 Zina Gallery
                 <br />
@@ -47,7 +47,7 @@ export function Case029ZinaGalleryPoster() {
 
             <div className="mt-[0.8%] grid flex-1 grid-cols-2 gap-x-6">
               <div />
-              <div className="pt-[2.4%]">
+              <div className="pt-[2.4%] transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] motion-safe:group-hover:translate-x-[6px]">
                 <h2 className="max-w-[7ch] text-[clamp(2.5rem,5.4vw,4.7rem)] leading-[0.9] font-semibold tracking-[-0.09em] text-white">
                   Sidequests
                   <br />
@@ -68,7 +68,7 @@ export function Case029ZinaGalleryPoster() {
             </div>
 
             <div className="mt-[0.8%] grid grid-cols-2 gap-x-6">
-              <div className="border-t-[8px] border-white pt-[4.6%]">
+              <div className="border-t-[8px] border-white pt-[4.6%] transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] motion-safe:group-hover:translate-y-[-2px]">
                 <h2 className="max-w-[6ch] text-[clamp(2.8rem,5.9vw,5rem)] leading-[0.9] font-semibold tracking-[-0.1em] text-white">
                   Vernisaj:
                   <br />
