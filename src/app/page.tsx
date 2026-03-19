@@ -8,36 +8,51 @@ const statusLabel = {
 } as const;
 
 const sectionAccent = {
-  "batch-2026-03-18-b": "bg-[#18ff17] text-black",
-  archive: "border border-white/12 bg-white/[0.04] text-white/80",
+  "batch-2026-03-18-b": "border border-white/16 bg-white/[0.06] text-white",
+  archive: "border border-white/12 bg-white/[0.03] text-white/78",
 } as const;
+
+const featuredSlugs = new Set([
+  "case-003-julie-doucet",
+  "case-004-boookin-shop",
+  "case-005-self-esteem-editorial",
+  "case-010-dev-agency-hero",
+  "case-019-bbbank-mobile-dashboard",
+  "case-020-radinal-pixel-font",
+  "case-021-cygnito-mono-poster",
+]);
 
 export default function Home() {
   const groups = getCaseGroups();
+  const allCases = groups.flatMap((group) => group.cases);
+  const featuredCases = allCases.filter((item) => featuredSlugs.has(item.slug));
 
   return (
-    <main className="min-h-screen bg-black px-6 py-10 text-white md:px-10">
-      <div className="mx-auto flex max-w-7xl flex-col gap-10">
-        <header className="flex flex-col gap-4 border-b border-white/10 pb-6">
-          <p className="text-xs uppercase tracking-[0.3em] text-white/45">
-            claw-ui-library
-          </p>
-          <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
-            <div>
-              <h1 className="text-4xl font-semibold tracking-tight md:text-6xl">
-                Pixel-accurate UI reconstruction cases
+    <main className="min-h-screen bg-black px-4 py-6 text-white md:px-8 md:py-8">
+      <div className="mx-auto flex max-w-[1600px] flex-col gap-8">
+        <header className="flex flex-col gap-5 border-b border-white/10 pb-6">
+          <div className="flex flex-col gap-3 xl:flex-row xl:items-end xl:justify-between">
+            <div className="max-w-4xl">
+              <p className="text-[0.68rem] uppercase tracking-[0.32em] text-white/42">
+                claw-ui-library
+              </p>
+              <h1 className="mt-3 text-3xl font-semibold tracking-[-0.04em] text-white md:text-5xl">
+                A library of pixel-accurate UI reconstructions
               </h1>
-              <p className="mt-3 max-w-2xl text-sm leading-6 text-white/65 md:text-base">
-                One image in, one deployed page out. Each Pinterest wave keeps its own viewing lane so review stays clean and batch-to-batch drift stays obvious.
+              <p className="mt-3 max-w-3xl text-sm leading-6 text-white/68 md:text-[15px]">
+                A public index of interface reconstruction studies, designed for fast scanning, comparison, and collection-level browsing.
               </p>
             </div>
 
-            <div className="flex flex-wrap gap-2 text-xs uppercase tracking-[0.24em]">
+            <div className="flex flex-wrap gap-2 text-[0.68rem] uppercase tracking-[0.24em] text-white/72">
+              <span className="rounded-full border border-white/10 px-3 py-2 text-white/52">
+                {allCases.length} cases
+              </span>
               {groups.map((group) => (
                 <a
                   key={group.id}
                   href={`#${group.id}`}
-                  className={`rounded-full px-4 py-2 transition hover:opacity-100 ${sectionAccent[group.id]}`}
+                  className={`rounded-full px-4 py-2 transition hover:border-white/28 hover:bg-white/[0.08] ${sectionAccent[group.id]}`}
                 >
                   {group.label}
                 </a>
@@ -46,44 +61,100 @@ export default function Home() {
           </div>
         </header>
 
-        <div className="flex flex-col gap-12">
+        {featuredCases.length > 0 ? (
+          <section className="scroll-mt-10 border border-white/10 bg-white/[0.025] p-4 md:p-5">
+            <div className="mb-4 flex flex-col gap-2 md:flex-row md:items-end md:justify-between">
+              <div>
+                <div className="inline-flex border border-white/14 bg-white/[0.06] px-3 py-1 text-[0.68rem] uppercase tracking-[0.24em] text-white/88">
+                  Featured
+                </div>
+                <h2 className="mt-3 text-2xl font-medium tracking-[-0.03em] text-white md:text-3xl">
+                  Selected reconstructions
+                </h2>
+              </div>
+              <p className="max-w-2xl text-sm leading-6 text-white/60">
+                A curated selection of standout studies from across the library, surfaced first for a faster introduction to the collection.
+              </p>
+            </div>
+
+            <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4 2xl:grid-cols-7">
+              {featuredCases.map((item) => (
+                <Link
+                  key={item.slug}
+                  href={`/ui/${item.slug}`}
+                  className="group border border-white/10 bg-black transition hover:border-white/28 hover:bg-white/[0.03]"
+                >
+                  <div className="aspect-[4/5] w-full overflow-hidden bg-white/[0.04]">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src={item.image}
+                      alt={item.title}
+                      className="h-full w-full object-cover transition duration-500 group-hover:scale-[1.02]"
+                    />
+                  </div>
+                  <div className="space-y-2 border-t border-white/10 p-3">
+                    <div className="flex items-start justify-between gap-3">
+                      <h3 className="text-sm font-medium leading-5 text-white/92">
+                        {item.title}
+                      </h3>
+                      <span className="shrink-0 border border-white/12 px-2 py-1 text-[0.62rem] uppercase tracking-[0.2em] text-white/66">
+                        {statusLabel[item.status]}
+                      </span>
+                    </div>
+                    <p className="text-[0.68rem] uppercase tracking-[0.22em] text-white/42">
+                      {item.slug.replace("case-", "").replace(/-/g, " ")}
+                    </p>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </section>
+        ) : null}
+
+        <div className="flex flex-col gap-10">
           {groups.map((group) => (
             <section key={group.id} id={group.id} className="scroll-mt-10">
-              <div className="mb-5 flex flex-col gap-2 md:flex-row md:items-end md:justify-between">
+              <div className="mb-4 flex flex-col gap-2 md:flex-row md:items-end md:justify-between">
                 <div>
-                  <div className={`inline-flex rounded-full px-3 py-1 text-[0.68rem] uppercase tracking-[0.24em] ${sectionAccent[group.id]}`}>
+                  <div
+                    className={`inline-flex px-3 py-1 text-[0.68rem] uppercase tracking-[0.24em] ${sectionAccent[group.id]}`}
+                  >
                     {group.label}
                   </div>
-                  <h2 className="mt-3 text-2xl font-medium tracking-tight md:text-3xl">
-                    {group.id === "batch-2026-03-18-b" ? "Fresh Pinterest intake" : "Previous production wave"}
+                  <h2 className="mt-3 text-xl font-medium tracking-[-0.03em] text-white md:text-2xl">
+                    {group.id === "batch-2026-03-18-b"
+                      ? "Current collection"
+                      : "Archive collection"}
                   </h2>
                 </div>
-                <p className="max-w-xl text-sm leading-6 text-white/55">{group.description}</p>
+                <p className="max-w-xl text-sm leading-6 text-white/56">{group.description}</p>
               </div>
 
-              <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+              <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4 2xl:grid-cols-5">
                 {group.cases.map((item) => (
                   <Link
                     key={item.slug}
                     href={`/ui/${item.slug}`}
-                    className="group overflow-hidden rounded-[2rem] border border-white/10 bg-white/[0.03] transition hover:border-white/25 hover:bg-white/[0.05]"
+                    className="group overflow-hidden border border-white/10 bg-white/[0.02] transition hover:border-white/25 hover:bg-white/[0.04]"
                   >
-                    <div className="aspect-[4/5] w-full bg-white/5">
+                    <div className="aspect-[16/11] w-full bg-white/[0.04]">
                       {/* eslint-disable-next-line @next/next/no-img-element */}
                       <img
                         src={item.image}
                         alt={item.title}
-                        className="h-full w-full object-cover transition duration-500 group-hover:scale-[1.015]"
+                        className="h-full w-full object-cover object-top transition duration-500 group-hover:scale-[1.015]"
                       />
                     </div>
-                    <div className="flex items-center justify-between gap-4 p-5">
-                      <div>
-                        <h3 className="text-lg font-medium">{item.title}</h3>
-                        <p className="mt-1 text-xs uppercase tracking-[0.24em] text-white/45">
+                    <div className="flex items-start justify-between gap-3 border-t border-white/10 p-3">
+                      <div className="min-w-0">
+                        <h3 className="truncate text-sm font-medium text-white/92">
+                          {item.title}
+                        </h3>
+                        <p className="mt-1 truncate text-[0.68rem] uppercase tracking-[0.22em] text-white/42">
                           {item.slug}
                         </p>
                       </div>
-                      <span className="rounded-full border border-white/10 px-3 py-1 text-xs text-white/70">
+                      <span className="shrink-0 border border-white/12 px-2 py-1 text-[0.62rem] uppercase tracking-[0.2em] text-white/66">
                         {statusLabel[item.status]}
                       </span>
                     </div>

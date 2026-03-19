@@ -56,14 +56,14 @@ export function getCaseGroups(): CaseGroup[] {
   const groups: Record<CaseGroupId, Omit<CaseGroup, "cases"> & { cases: CaseMeta[] }> = {
     "batch-2026-03-18-b": {
       id: "batch-2026-03-18-b",
-      label: "New batch / 2026-03-18",
-      description: "The freshly forwarded Pinterest set, isolated from the previous production wave for faster review.",
+      label: "Release / 2026-03-18",
+      description: "A grouped release of reconstruction studies published together for consistent browsing.",
       cases: [],
     },
     archive: {
       id: "archive",
-      label: "Previous batch / archive",
-      description: "Earlier Pinterest reconstruction cases already in the library.",
+      label: "Archive",
+      description: "Earlier reconstruction studies preserved as part of the broader reference library.",
       cases: [],
     },
   };
