@@ -37,10 +37,10 @@ export default function Home() {
                 claw-ui-library
               </p>
               <h1 className="mt-3 text-3xl font-semibold tracking-[-0.04em] text-white md:text-5xl">
-                Pixel-accurate UI reconstruction cases
+                A library of pixel-accurate UI reconstructions
               </h1>
               <p className="mt-3 max-w-3xl text-sm leading-6 text-white/68 md:text-[15px]">
-                首页先回到高效阅览：更高密度、更稳定的黑白灰、更清楚的优先级。上方展示精选案例，下方保留按批次浏览。
+                A public index of interface reconstruction studies, designed for fast scanning, comparison, and collection-level browsing.
               </p>
             </div>
 
@@ -66,14 +66,14 @@ export default function Home() {
             <div className="mb-4 flex flex-col gap-2 md:flex-row md:items-end md:justify-between">
               <div>
                 <div className="inline-flex border border-white/14 bg-white/[0.06] px-3 py-1 text-[0.68rem] uppercase tracking-[0.24em] text-white/88">
-                  Highlight selection
+                  Featured
                 </div>
                 <h2 className="mt-3 text-2xl font-medium tracking-[-0.03em] text-white md:text-3xl">
-                  Recommended first look
+                  Selected reconstructions
                 </h2>
               </div>
               <p className="max-w-2xl text-sm leading-6 text-white/60">
-                先看这 7 个：003 / 004 / 005 / 010 / 019 / 020 / 021。它们单独放在顶部，方便快速 review 风格质量和完成度。
+                A curated selection of standout studies from across the library, surfaced first for a faster introduction to the collection.
               </p>
             </div>
 
@@ -123,8 +123,8 @@ export default function Home() {
                   </div>
                   <h2 className="mt-3 text-xl font-medium tracking-[-0.03em] text-white md:text-2xl">
                     {group.id === "batch-2026-03-18-b"
-                      ? "Fresh Pinterest intake"
-                      : "Previous production wave"}
+                      ? "Current collection"
+                      : "Archive collection"}
                   </h2>
                 </div>
                 <p className="max-w-xl text-sm leading-6 text-white/56">{group.description}</p>
