@@ -35,3 +35,152 @@ a {
 img {
   display: block;
 }
+
+@keyframes mona-float {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+@keyframes mona-pulse-soft {
+  0%,
+  100% {
+    opacity: 0.6;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.04);
+  }
+}
+
+@keyframes mona-progress-shift {
+  0%,
+  100% {
+    transform: translate(-50%, -50%);
+    left: 58%;
+  }
+  50% {
+    transform: translate(-50%, -50%);
+    left: 66%;
+  }
+}
+
+@keyframes mona-bar-breathe {
+  0%,
+  100% {
+    transform: scaleY(0.9);
+    opacity: 0.9;
+  }
+  50% {
+    transform: scaleY(1.08);
+    opacity: 1;
+  }
+}
+
+@keyframes mona-marquee-glow {
+  0%,
+  100% {
+    transform: translateX(0);
+    opacity: 0.78;
+  }
+  50% {
+    transform: translateX(4px);
+    opacity: 1;
+  }
+}
+
+@keyframes mona-scanline {
+  0% {
+    transform: translateY(-8%);
+    opacity: 0;
+  }
+  20% {
+    opacity: 0.72;
+  }
+  60% {
+    opacity: 0.4;
+  }
+  100% {
+    transform: translateY(108%);
+    opacity: 0;
+  }
+}
+
+@keyframes mona-flicker {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  8% {
+    opacity: 0.86;
+  }
+  10% {
+    opacity: 0.98;
+  }
+  22% {
+    opacity: 0.9;
+  }
+  24% {
+    opacity: 1;
+  }
+  64% {
+    opacity: 0.94;
+  }
+  66% {
+    opacity: 1;
+  }
+}
+
+@keyframes mona-decode {
+  0%,
+  18%,
+  100% {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  24%,
+  72% {
+    opacity: 0.16;
+    transform: translateY(0);
+  }
+}
+
+@keyframes mona-diagonal-drift {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+    opacity: 0.55;
+  }
+  50% {
+    transform: translate3d(-10px, 10px, 0);
+    opacity: 0.95;
+  }
+}
+
+@keyframes mona-title-shift {
+  0%,
+  100% {
+    letter-spacing: 0.08em;
+    transform: translateX(0);
+  }
+  50% {
+    letter-spacing: 0.11em;
+    transform: translateX(6px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
