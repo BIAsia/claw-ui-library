@@ -6,6 +6,8 @@ export type AgentStyleSpec = {
   category: string;
   intent: string;
   fitForAgents: string;
+  lockedMode: string;
+  nonNegotiables: string[];
   visualRules: string[];
   componentRules: string[];
   pageConstraints: string[];
@@ -25,6 +27,13 @@ export const agentStyleSpecs: AgentStyleSpec[] = [
       "A highly opinionated collage-like visual language for expressive storytelling, weird cultural interfaces, and anti-corporate narrative surfaces.",
     fitForAgents:
       "Useful when an agent needs to generate something unmistakably authored instead of clean/productized UI. Strong stylistic bias, low ambiguity.",
+    lockedMode: "Interactive poster-card surface",
+    nonNegotiables: [
+      "Use one dominant card/object as the main surface, not stacked web sections.",
+      "Keep pointer-reactive motion or tilt as a core part of the experience.",
+      "Text stays sparse: one large title, a little support copy, a few graphic labels.",
+      "The result should feel like a designed object or poster, not a conventional website shell.",
+    ],
     visualRules: [
       "Off-white paper background with warm reds and hand-drawn pink accent shapes.",
       "Heavy condensed uppercase display type contrasted with smaller informational sans text.",
@@ -62,6 +71,13 @@ export const agentStyleSpecs: AgentStyleSpec[] = [
       "A disciplined merchandising-style layout system for presenting many equally important items with strong scanability and light visual framing.",
     fitForAgents:
       "Useful when an agent needs a stable display format for selectable outputs, assets, prompt packs, or style candidates without over-explaining each item.",
+    lockedMode: "Structured catalog browser",
+    nonNegotiables: [
+      "Preserve a browse-first product grid or shelf structure.",
+      "Items should read as collectible entries with image/object weight, not generic feature cards.",
+      "Use restrained filtering/sorting/catalog metadata instead of narrative section stacking.",
+      "The page should feel like an inventory or shop-like archive before it feels like marketing.",
+    ],
     visualRules: [
       "Strict grid-first layout with consistent item rhythm and restrained typography.",
       "Editorial retail energy: image-led, object-led, browsable.",
@@ -99,6 +115,13 @@ export const agentStyleSpecs: AgentStyleSpec[] = [
       "A refined editorial system for long-form storytelling, layered visual pacing, and serious cultural or conceptual presentation.",
     fitForAgents:
       "Useful when an agent needs to present a result with narrative sequence, section pacing, and a stronger sense of human-readable publication quality.",
+    lockedMode: "Magazine-style editorial front page",
+    nonNegotiables: [
+      "Preserve a strong editorial masthead/hero relationship instead of generic product sections.",
+      "Use one atmospheric visual field plus a small set of article-like entries or issue blocks.",
+      "Navigation, headlines, and dates should feel publication-led rather than app-led.",
+      "The page should read like an editorial homepage for the concept, not a standard marketing site.",
+    ],
     visualRules: [
       "Magazine-like pacing with strong section rhythm and typographic contrast.",
       "Image and text carry equal weight; layout alternates between immersion and structure.",
