@@ -29,12 +29,9 @@ function useScrambleText(text: string, delay = 0, stepMs = 34) {
         timeout = setTimeout(() => {
           frame = requestAnimationFrame(tick);
         }, stepMs);
-      } else {
-        setDisplay(target);
       }
     };
 
-    setDisplay(target);
     timeout = setTimeout(() => {
       frame = requestAnimationFrame(tick);
     }, delay);
