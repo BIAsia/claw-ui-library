@@ -1,8 +1,7 @@
 "use client";
 
-import Link from "next/link";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { Barlow_Condensed, IBM_Plex_Sans } from "next/font/google";
-import { useMemo, useState } from "react";
 
 const displayFace = Barlow_Condensed({
   subsets: ["latin"],
@@ -16,284 +15,360 @@ const infoFace = IBM_Plex_Sans({
   weight: ["400", "500", "600", "700"],
 });
 
-const labels = [
-  { text: "signal drift", left: "10%", top: "15%", rotate: -10, tone: "paper" as const },
-  { text: "cabinet note", left: "74%", top: "12%", rotate: 12, tone: "pink" as const },
-  { text: "pattern pending", left: "70%", top: "77%", rotate: -8, tone: "paper" as const },
-  { text: "unstable index", left: "7%", top: "74%", rotate: 7, tone: "pink" as const },
+type Point = readonly [number, number];
+
+type LargeTextProps = {
+  x: number;
+  y: number;
+  size: number;
+  lines: string[];
+  align?: "start" | "middle" | "end";
+  lineHeight?: number;
+};
+
+type CopyBlockProps = {
+  x: number;
+  y: number;
+  size?: number;
+  weight?: number;
+  lines: string[];
+  align?: "start" | "middle" | "end";
+  lineHeight?: number;
+  fill?: string;
+};
+
+const paper = "#f6f2ef";
+const red = "#d92633";
+const pink = "#f0b9df";
+const pinkStroke = "#d786ac";
+const note = "#9b554c";
+
+const centralBurst: Point[] = [
+  [203, 137], [280, 188], [338, 116], [379, 203], [486, 177], [424, 259], [514, 322], [408, 322],
+  [429, 433], [326, 359], [252, 448], [230, 346], [143, 402], [194, 302], [108, 264], [209, 238],
+];
+const topRightBurst: Point[] = [
+  [512, 31], [545, 86], [584, 18], [566, 94], [643, 66], [580, 118], [601, 207], [548, 149],
+  [533, 226], [512, 154], [448, 170], [493, 116], [441, 47],
+];
+const cloverLeft: Point[] = [
+  [82, 525], [78, 490], [97, 465], [130, 461], [154, 438], [192, 447], [208, 474], [244, 474],
+  [261, 502], [254, 534], [270, 566], [256, 595], [222, 602], [201, 631], [167, 635], [146, 607],
+  [109, 613], [86, 591], [86, 559],
+];
+const miniClover: Point[] = [
+  [263, 608], [258, 586], [273, 569], [296, 573], [311, 553], [336, 563], [341, 585], [365, 591],
+  [370, 614], [354, 629], [355, 650], [331, 657], [315, 644], [294, 656], [275, 648], [271, 628],
+];
+const speechBubble: Point[] = [
+  [455, 401], [496, 394], [553, 393], [614, 399], [666, 416], [687, 444], [688, 478], [675, 511],
+  [649, 536], [620, 550], [625, 566], [606, 569], [585, 561], [533, 563], [478, 560], [437, 548],
+  [412, 528], [405, 496], [410, 460], [425, 428],
 ];
 
-const wirePaths = [
-  "M 82 154 C 152 111, 257 106, 346 146",
-  "M 522 164 C 575 142, 637 153, 672 197 C 693 224, 695 264, 671 298",
-  "M 130 742 C 212 780, 287 796, 372 806 C 457 815, 542 808, 620 770",
-  "M 520 500 C 566 472, 626 481, 654 527 C 673 561, 666 606, 628 634",
+const brushPatchPath =
+  "M 338 650 C 360 631, 392 624, 426 631 C 468 638, 506 662, 537 699 C 563 731, 583 775, 601 831 L 579 841 L 567 827 L 558 846 L 544 833 L 534 851 L 521 837 L 511 852 L 498 838 L 488 853 L 474 839 L 464 855 L 451 842 L 440 856 L 428 842 L 417 856 L 405 844 L 393 855 L 382 841 L 371 848 L 359 834 L 349 836 L 343 818 L 351 804 L 339 794 L 343 778 L 333 768 L 341 753 L 332 742 L 341 726 L 333 713 L 344 703 L 336 687 L 344 672 L 338 650 Z";
+
+const lowerSticker: Point[] = [
+  [444, 912], [473, 916], [502, 899], [517, 928], [554, 930], [543, 958], [573, 976], [543, 991],
+  [548, 1020], [518, 1016], [492, 1030], [472, 1010], [450, 1020], [441, 995], [411, 991], [424, 964],
+  [410, 938], [436, 938],
 ];
 
-const markPaths = [
-  "M 214 116 L 260 174",
-  "M 247 101 L 265 140",
-  "M 118 625 L 158 647",
-  "M 576 675 L 620 694",
-  "M 548 714 L 591 727",
-  "M 228 844 L 269 834",
+const diagonalStrip = "M 96 734 L 142 679 L 326 839 L 292 915 Q 286 927 275 926 L 94 773 Q 82 763 86 748 Z";
+const topLoop = "M 156 167 C 185 121, 275 106, 363 116 C 469 128, 551 149, 585 183 C 616 212, 612 251, 576 270 C 532 289, 456 282, 369 264 C 278 245, 204 242, 168 212 C 151 198, 143 182, 156 167 Z";
+const centerCircle = "M 302 596 C 325 571, 354 568, 373 585 C 392 602, 392 632, 370 651 C 349 669, 317 669, 298 649 C 283 633, 283 608, 302 596 Z";
+const lowerArc = "M 127 846 C 205 902, 280 932, 360 955 C 432 976, 502 982, 558 978";
+const rightLoop = "M 588 558 C 626 538, 671 546, 701 580 C 721 607, 724 647, 705 678 C 681 711, 633 723, 597 701";
+const leftParenA = "M 51 533 C 28 551, 18 584, 23 620 C 27 652, 46 680, 74 691";
+const leftParenB = "M 72 545 C 54 560, 47 586, 50 615 C 53 639, 66 660, 86 669";
+const topStrokes = [
+  "M 213 20 L 268 106", "M 227 74 L 228 176", "M 248 129 L 281 222", "M 318 113 L 422 10",
+  "M 354 171 L 430 85", "M 557 33 L 584 -15", "M 613 62 L 677 35",
 ];
+const brushMarks = [
+  "M 404 664 L 370 689", "M 456 706 L 419 738", "M 489 780 L 451 811", "M 519 862 L 476 894",
+  "M 407 868 L 371 896", "M 346 833 L 316 853", "M 350 752 L 318 775", "M 341 899 L 304 912",
+  "M 423 860 L 385 883", "M 440 729 L 406 753",
+];
+const rightZig = "M 636 719 L 676 710 L 647 750 L 687 747 L 655 794 L 696 792 L 665 844 L 699 853";
 
-function labelToneClasses(tone: "paper" | "pink") {
-  return tone === "pink"
-    ? "border-[#cc2a36] bg-[#efbfd8] text-[#8e4047]"
-    : "border-[#cc2a36] bg-[#f6efe8] text-[#9a545a]";
+function createSplinePath(points: Point[], closed = false, tension = 0.9) {
+  if (points.length < 2) return "";
+  const getPoint = (index: number) => {
+    if (closed) return points[(index + points.length) % points.length];
+    if (index < 0) return points[0];
+    if (index >= points.length) return points[points.length - 1];
+    return points[index];
+  };
+  let path = `M ${points[0][0]} ${points[0][1]}`;
+  const lastIndex = closed ? points.length : points.length - 1;
+  for (let index = 0; index < lastIndex; index += 1) {
+    const current = getPoint(index);
+    const next = getPoint(index + 1);
+    const previous = getPoint(index - 1);
+    const nextNext = getPoint(index + 2);
+    const cp1x = current[0] + ((next[0] - previous[0]) / 6) * tension;
+    const cp1y = current[1] + ((next[1] - previous[1]) / 6) * tension;
+    const cp2x = next[0] - ((nextNext[0] - current[0]) / 6) * tension;
+    const cp2y = next[1] - ((nextNext[1] - current[1]) / 6) * tension;
+    path += ` C ${cp1x} ${cp1y}, ${cp2x} ${cp2y}, ${next[0]} ${next[1]}`;
+  }
+  return closed ? `${path} Z` : path;
+}
+
+function LargeText({ x, y, size, lines, align = "start", lineHeight = 0.86 }: LargeTextProps) {
+  return (
+    <text
+      x={x}
+      y={y}
+      fill={red}
+      textAnchor={align}
+      fontSize={size}
+      fontWeight={600}
+      letterSpacing="-0.045em"
+      style={{ textTransform: "uppercase" }}
+    >
+      {lines.map((line, index) => (
+        <tspan key={`${line}-${index}`} x={x} dy={index === 0 ? 0 : `${lineHeight}em`}>
+          {line}
+        </tspan>
+      ))}
+    </text>
+  );
+}
+
+function CopyBlock({ x, y, size = 13, weight = 600, lines, align = "start", lineHeight = 1.2, fill = note }: CopyBlockProps) {
+  return (
+    <text
+      x={x}
+      y={y}
+      fill={fill}
+      textAnchor={align}
+      fontFamily="var(--font-signal-cabinet-003-info)"
+      fontSize={size}
+      fontWeight={weight}
+      letterSpacing="-0.03em"
+    >
+      {lines.map((line, index) => (
+        <tspan key={`${line}-${index}`} x={x} dy={index === 0 ? 0 : `${lineHeight}em`}>
+          {line}
+        </tspan>
+      ))}
+    </text>
+  );
+}
+
+function PinkShape({ d }: { d: string }) {
+  return (
+    <path
+      d={d}
+      fill={pink}
+      stroke={pinkStroke}
+      strokeWidth="2.2"
+      strokeLinejoin="round"
+      strokeLinecap="round"
+    />
+  );
 }
 
 export default function SignalCabinet003Page() {
-  const [pointer, setPointer] = useState({ x: 0.5, y: 0.5 });
+  const containerRef = useRef<HTMLDivElement>(null);
   const [hovered, setHovered] = useState(false);
+  const [pointer, setPointer] = useState({ x: 0, y: 0 });
+  const [tilt, setTilt] = useState({ rx: 0, ry: 0, tx: 0, ty: 0 });
 
-  const rotateX = (pointer.y - 0.5) * -10;
-  const rotateY = (pointer.x - 0.5) * 11;
-  const shiftX = (pointer.x - 0.5) * 24;
-  const shiftY = (pointer.y - 0.5) * 16;
-
-  const motion = useMemo(
+  const svgPaths = useMemo(
     () => ({
-      foregroundX: shiftX * 0.9,
-      foregroundY: shiftY * 0.9,
-      midX: shiftX * 0.42,
-      midY: shiftY * 0.42,
-      backX: shiftX * -0.18,
-      backY: shiftY * -0.18,
+      centralBurst: createSplinePath(centralBurst, true),
+      topRightBurst: createSplinePath(topRightBurst, true),
+      cloverLeft: createSplinePath(cloverLeft, true),
+      miniClover: createSplinePath(miniClover, true),
+      speechBubble: createSplinePath(speechBubble, true),
+      lowerSticker: createSplinePath(lowerSticker, true),
     }),
-    [shiftX, shiftY],
+    [],
   );
 
-  return (
-    <main
-      className={`${displayFace.variable} ${infoFace.variable} min-h-screen overflow-hidden bg-[#121111] text-[#cc2a36]`}
-    >
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_12%,rgba(255,255,255,0.08),transparent_22%),linear-gradient(180deg,#171414_0%,#0f0e0e_100%)]" />
+  useEffect(() => {
+    const el = containerRef.current;
+    if (!el) return;
 
-      <div className="relative flex min-h-screen items-center justify-center px-4 py-8 md:px-10 md:py-14">
-        <div className="relative w-full max-w-[1120px]">
+    const onMove = (event: PointerEvent) => {
+      const rect = el.getBoundingClientRect();
+      const px = event.clientX - rect.left;
+      const py = event.clientY - rect.top;
+      const nx = px / rect.width - 0.5;
+      const ny = py / rect.height - 0.5;
+
+      setPointer({ x: px, y: py });
+      setTilt({
+        rx: ny * -7,
+        ry: nx * 9,
+        tx: nx * 14,
+        ty: ny * 10,
+      });
+    };
+
+    const onEnter = () => setHovered(true);
+    const onLeave = () => {
+      setHovered(false);
+      setTilt({ rx: 0, ry: 0, tx: 0, ty: 0 });
+    };
+
+    el.addEventListener("pointermove", onMove);
+    el.addEventListener("pointerenter", onEnter);
+    el.addEventListener("pointerleave", onLeave);
+
+    return () => {
+      el.removeEventListener("pointermove", onMove);
+      el.removeEventListener("pointerenter", onEnter);
+      el.removeEventListener("pointerleave", onLeave);
+    };
+  }, []);
+
+  return (
+    <main className={`${displayFace.variable} ${infoFace.variable} min-h-screen overflow-hidden bg-[#131313] text-white`}>
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(255,255,255,0.06),transparent_35%),linear-gradient(180deg,#171717_0%,#0d0d0d_100%)]" />
+      <div className="relative mx-auto flex min-h-screen w-full max-w-[1400px] items-center justify-center px-4 py-10 md:px-10 md:py-16">
+        <div ref={containerRef} className="group relative w-full max-w-[860px] cursor-none" style={{ perspective: 1800 }}>
           <div
             aria-hidden
-            className="pointer-events-none absolute left-1/2 top-1/2 h-[76vh] w-[76vh] max-h-[880px] max-w-[880px] -translate-x-1/2 -translate-y-1/2 rounded-full blur-3xl transition duration-300"
+            className="pointer-events-none absolute -inset-12 opacity-70 blur-3xl transition duration-300"
             style={{
-              background: `radial-gradient(circle at ${pointer.x * 100}% ${pointer.y * 100}%, rgba(239,191,216,0.22), transparent 25%), radial-gradient(circle at 50% 42%, rgba(204,42,54,0.12), transparent 38%)`,
-              opacity: hovered ? 1 : 0.68,
+              background: `radial-gradient(circle at ${hovered ? `${pointer.x}px ${pointer.y}px` : "50% 35%"}, rgba(240,185,223,0.22), transparent 24%), radial-gradient(circle at 52% 48%, rgba(223,37,50,0.16), transparent 28%)`,
             }}
           />
 
-          {labels.map((label, index) => (
-            <div
-              key={label.text}
-              aria-hidden
-              className={`pointer-events-none absolute hidden border px-3 py-2 text-[0.66rem] font-semibold uppercase tracking-[0.22em] md:block ${labelToneClasses(label.tone)}`}
-              style={{
-                left: label.left,
-                top: label.top,
-                transform: `translate3d(${motion.backX * (0.8 + index * 0.08)}px, ${motion.backY * (0.8 + index * 0.08)}px, 0) rotate(${label.rotate}deg)`,
-                boxShadow: "0 14px 30px rgba(0,0,0,0.16)",
-              }}
-            >
-              {label.text}
-            </div>
-          ))}
-
-          <article
-            onPointerEnter={() => setHovered(true)}
-            onPointerLeave={() => {
-              setHovered(false);
-              setPointer({ x: 0.5, y: 0.5 });
-            }}
-            onPointerMove={(event) => {
-              const rect = event.currentTarget.getBoundingClientRect();
-              setPointer({
-                x: (event.clientX - rect.left) / rect.width,
-                y: (event.clientY - rect.top) / rect.height,
-              });
-            }}
-            className="relative mx-auto aspect-[736/1051] w-full max-w-[736px] overflow-hidden rounded-[1.7rem] border border-[#cf9e97]/35 bg-[#f6f0e8] shadow-[0_36px_120px_rgba(0,0,0,0.48)]"
+          <div
+            className="relative mx-auto aspect-[736/1051] w-full max-w-[736px] overflow-hidden rounded-[1.6rem] bg-[#f7f2ef] shadow-[0_36px_120px_rgba(0,0,0,0.45)] transition-transform duration-200 ease-out will-change-transform"
             style={{
-              transform: `perspective(1800px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translate3d(${shiftX}px, ${shiftY}px, 0) scale(${hovered ? 1.008 : 1})`,
-              transformStyle: "preserve-3d",
-              transition: hovered ? "none" : "transform 260ms ease",
+              transform: `rotateX(${tilt.rx}deg) rotateY(${tilt.ry}deg) translate3d(${tilt.tx}px, ${tilt.ty}px, 0)`,
             }}
           >
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_18%_11%,rgba(255,255,255,0.88),transparent_16%),radial-gradient(circle_at_74%_74%,rgba(255,255,255,0.44),transparent_22%),linear-gradient(180deg,rgba(255,255,255,0.3),rgba(255,255,255,0.06)_14%,rgba(0,0,0,0.03)_62%,rgba(255,255,255,0.18))]" />
-            <div className="absolute inset-0 opacity-[0.16] mix-blend-multiply [background-image:radial-gradient(circle_at_1px_1px,rgba(165,129,122,0.42)_1px,transparent_0)] [background-size:13px_13px]" />
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_12%,rgba(255,255,255,0.82),transparent_18%),radial-gradient(circle_at_73%_76%,rgba(255,255,255,0.48),transparent_26%),linear-gradient(180deg,rgba(255,255,255,0.35),rgba(255,255,255,0.06)_12%,rgba(0,0,0,0.02)_58%,rgba(255,255,255,0.22))]" />
+            <div className="absolute inset-0 opacity-[0.18] mix-blend-multiply [background-image:radial-gradient(circle_at_1px_1px,rgba(180,156,150,0.45)_1px,transparent_0)] [background-size:14px_14px]" />
             <div
               aria-hidden
               className="pointer-events-none absolute inset-0 mix-blend-screen transition-opacity duration-200"
               style={{
-                opacity: hovered ? 1 : 0.52,
-                background: `radial-gradient(240px 240px at ${pointer.x * 100}% ${pointer.y * 100}%, rgba(255,255,255,0.18), transparent 42%)`,
+                opacity: hovered ? 1 : 0.55,
+                background: `radial-gradient(240px 240px at ${pointer.x}px ${pointer.y}px, rgba(255,255,255,0.16), transparent 44%)`,
               }}
             />
-
-            <div
-              className="absolute inset-x-[7%] top-[6.5%] flex items-start justify-between text-[0.66rem] font-semibold uppercase tracking-[0.26em] text-[#a35c5f]"
-              style={{ transform: `translate3d(${motion.backX}px, ${motion.backY}px, 0)` }}
-            >
-              <div className="space-y-1">
-                <p>agent probe</p>
-                <p>signal cabinet / 003</p>
-              </div>
-              <Link href="/agent-probe/signal-cabinet" className="transition hover:opacity-60">
-                index
-              </Link>
-            </div>
 
             <svg
               viewBox="0 0 736 1051"
               className="absolute inset-0 h-full w-full"
               role="img"
-              aria-label="Signal Cabinet poster card with oversized typography, cabinet labels, hand-drawn graphic traces, and pointer-reactive depth."
+              aria-label="Signal Cabinet poster surface with oversized condensed title fragments, sparse cabinet notes, pink collage shapes, and pointer-reactive hand-drawn marks."
+              style={{ fontFamily: "var(--font-signal-cabinet-003-display)" }}
             >
-              <g transform={`translate(${motion.backX} ${motion.backY})`}>
-                <path
-                  d="M 137 162 C 157 121, 223 116, 272 142 C 312 163, 327 212, 293 240 C 253 273, 176 271, 136 231 C 118 212, 120 183, 137 162 Z"
-                  fill="#efbfd8"
-                  stroke="#cc2a36"
-                  strokeWidth="2.2"
-                />
-                <path
-                  d="M 520 128 C 563 99, 626 108, 659 148 C 688 183, 684 237, 635 254 C 579 272, 504 245, 487 193 C 481 169, 492 144, 520 128 Z"
-                  fill="#efbfd8"
-                  stroke="#cc2a36"
-                  strokeWidth="2.2"
-                />
-                <path
-                  d="M 474 760 C 512 733, 575 739, 618 776 C 647 802, 654 846, 623 874 C 584 908, 512 902, 467 866 C 430 836, 433 789, 474 760 Z"
-                  fill="#efbfd8"
-                  stroke="#cc2a36"
-                  strokeWidth="2.2"
-                />
-                <path
-                  d="M 120 760 C 150 732, 198 722, 240 739 C 279 754, 306 791, 291 824 C 273 862, 213 875, 161 858 C 115 843, 92 796, 120 760 Z"
-                  fill="#efbfd8"
-                  stroke="#cc2a36"
-                  strokeWidth="2.2"
-                />
+              <rect width="736" height="1051" fill={paper} />
+
+              <g style={{ transform: `translate(${tilt.tx * -0.12}px, ${tilt.ty * -0.12}px)` }}>
+                <LargeText x={52} y={101} size={82} lines={["SIGNAL", "CABINET"]} />
+                <LargeText x={448} y={296} size={82} lines={["ENTRY", "LAYER"]} />
+                <LargeText x={54} y={430} size={80} lines={["FRAGMENT", "ROUTING"]} />
+                <LargeText x={446} y={603} size={80} lines={["ARCHIVE", "DRIFT"]} />
+                <LargeText x={53} y={718} size={84} lines={["PATTERN", "HOLD"]} />
+                <LargeText x={283} y={894} size={84} lines={["TRACE", "RELEASE"]} />
               </g>
 
-              <g
-                fill="none"
-                stroke="#cc2a36"
-                strokeWidth="4.6"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                transform={`translate(${motion.midX} ${motion.midY})`}
-              >
-                {wirePaths.map((path) => (
-                  <path key={path} d={path} opacity="0.88" />
-                ))}
-                <path d="M 228 352 C 284 309, 376 295, 455 324 C 524 351, 561 418, 530 474 C 494 539, 394 558, 303 532 C 222 509, 166 431, 195 379" />
-                <path d="M 290 545 C 315 573, 355 586, 392 577 C 437 566, 471 528, 475 480" />
-                <path d="M 161 206 L 205 235 L 153 252" />
-                <path d="M 574 186 L 620 198 L 588 233" />
-                <path d="M 546 811 L 592 824 L 558 857" />
-                {markPaths.map((path) => (
-                  <path key={path} d={path} strokeWidth="3.9" />
-                ))}
+              <g style={{ transform: `translate(${tilt.tx * -0.08}px, ${tilt.ty * -0.08}px)` }}>
+                <CopyBlock
+                  x={304}
+                  y={41}
+                  lines={[
+                    "marketing surface, not the cabinet itself",
+                    "only the title, the mood, the route in",
+                  ]}
+                />
+                <CopyBlock
+                  x={53}
+                  y={260}
+                  lines={[
+                    "probe 003 / signal cabinet",
+                    "entry state for collected scraps",
+                    "before tools, before sorting",
+                  ]}
+                />
+                <CopyBlock
+                  x={292}
+                  y={565}
+                  weight={500}
+                  lines={[
+                    "signals stay loose until recurrence appears",
+                    "route / hold / release",
+                  ]}
+                />
+                <text
+                  x="129"
+                  y="811"
+                  fill={note}
+                  fontFamily="var(--font-signal-cabinet-003-info)"
+                  fontSize="12"
+                  fontWeight="500"
+                  letterSpacing="-0.03em"
+                  transform="rotate(-89 129 811)"
+                >
+                  <tspan x="129" dy="0">tiny index markers, unstable tags,</tspan>
+                  <tspan x="129" dy="1.18em">and a single authored title surface.</tspan>
+                  <tspan x="129" dy="1.18em">this page should invite entry,</tspan>
+                  <tspan x="129" dy="1.18em">not explain the whole system.</tspan>
+                </text>
+              </g>
+
+              <g fill="none" stroke={red} strokeWidth="4.8" strokeLinecap="round" strokeLinejoin="round" style={{ transform: `translate(${tilt.tx * 0.18}px, ${tilt.ty * 0.18}px)` }}>
+                <path d={topLoop} opacity="0.84" />
+                <path d={centerCircle} opacity="0.9" />
+                <path d={lowerArc} opacity="0.9" />
+                <path d={rightLoop} opacity="0.9" />
+                <path d={leftParenA} />
+                <path d={leftParenB} />
+                <path d={rightZig} />
+                {topStrokes.map((stroke) => <path key={stroke} d={stroke} />)}
+              </g>
+
+              <g style={{ transform: `translate(${tilt.tx * 0.12}px, ${tilt.ty * 0.12}px)` }}>
+                <PinkShape d={svgPaths.centralBurst} />
+                <PinkShape d={svgPaths.topRightBurst} />
+                <PinkShape d={svgPaths.cloverLeft} />
+                <PinkShape d={svgPaths.miniClover} />
+                <PinkShape d={svgPaths.speechBubble} />
+                <g transform="translate(8 -36)"><PinkShape d={brushPatchPath} /></g>
+                <PinkShape d={svgPaths.lowerSticker} />
+                <path d={diagonalStrip} fill={pink} stroke={pinkStroke} strokeWidth="2.2" strokeLinejoin="round" strokeLinecap="round" />
+              </g>
+
+              <g fill="none" stroke={red} strokeWidth="4.2" strokeLinecap="round" strokeLinejoin="round" transform="translate(8 -36)" style={{ transform: `translate(${tilt.tx * 0.2 + 8}px, ${tilt.ty * 0.2 - 36}px)` }}>
+                {brushMarks.map((stroke) => <path key={stroke} d={stroke} />)}
+              </g>
+
+              <g fill="none" stroke={pinkStroke} strokeWidth="2.1" strokeLinecap="round" style={{ transform: `translate(${tilt.tx * 0.1}px, ${tilt.ty * 0.1}px)` }}>
+                <g transform="translate(8 -36)">
+                  <path d="M 471 645 L 434 675" />
+                  <path d="M 452 673 L 413 705" />
+                  <path d="M 517 873 L 487 897" />
+                </g>
+                <path d="M 563 946 L 531 965" />
               </g>
             </svg>
+          </div>
 
-            <div className="absolute inset-x-[7%] top-[14%] flex justify-between gap-4">
-              <div
-                className="max-w-[48%]"
-                style={{ transform: `translate3d(${motion.foregroundX}px, ${motion.foregroundY}px, 0)` }}
-              >
-                <p
-                  className="text-[clamp(4.5rem,10vw,7.9rem)] font-semibold uppercase leading-[0.82] tracking-[-0.08em] text-[#d12633]"
-                  style={{ fontFamily: "var(--font-signal-cabinet-003-display)" }}
-                >
-                  Signal
-                  <br />
-                  Cabinet
-                </p>
-              </div>
-
-              <div
-                className="max-w-[29%] pt-2 text-right"
-                style={{ transform: `translate3d(${motion.midX}px, ${motion.midY}px, 0)` }}
-              >
-                <p
-                  className="text-[0.78rem] font-semibold uppercase leading-[1.25] tracking-[0.2em] text-[#a55f61]"
-                  style={{ fontFamily: "var(--font-signal-cabinet-003-info)" }}
-                >
-                  fragments stay live
-                  <br />
-                  until recurrence holds
-                </p>
-              </div>
-            </div>
-
-            <div
-              className="absolute left-[8.5%] top-[39%] max-w-[30%] border border-[#cc2a36] bg-[#f4ece4]/90 px-4 py-3 text-[0.68rem] font-semibold uppercase tracking-[0.2em] text-[#985156] shadow-[0_12px_24px_rgba(100,32,39,0.08)]"
-              style={{
-                transform: `translate3d(${motion.midX * 0.9}px, ${motion.midY * 0.9}px, 0) rotate(-6deg)`,
-                fontFamily: "var(--font-signal-cabinet-003-info)",
-              }}
-            >
-              listening stack
-              <br />
-              scan residue
-              <br />
-              rerouted evidence
-            </div>
-
-            <div
-              className="absolute right-[8%] top-[43%] max-w-[36%] border border-[#cc2a36] bg-[#efbfd8] px-5 py-5 text-[#862e37] shadow-[0_20px_38px_rgba(112,32,39,0.13)]"
-              style={{ transform: `translate3d(${motion.foregroundX * 0.7}px, ${motion.foregroundY * 0.7}px, 0) rotate(5deg)` }}
-            >
-              <p
-                className="text-[0.66rem] font-semibold uppercase tracking-[0.24em] text-[#9a4d56]"
-                style={{ fontFamily: "var(--font-signal-cabinet-003-info)" }}
-              >
-                active note
-              </p>
-              <p
-                className="mt-3 text-[1.22rem] font-semibold uppercase leading-[0.95] tracking-[-0.045em]"
-                style={{ fontFamily: "var(--font-signal-cabinet-003-display)" }}
-              >
-                not a filing system.
-                <br />
-                a pressure surface.
-              </p>
-            </div>
-
-            <div
-              className="absolute left-[8%] bottom-[12%] max-w-[34%]"
-              style={{ transform: `translate3d(${motion.midX * 0.8}px, ${motion.midY * 0.8}px, 0)` }}
-            >
-              <p
-                className="text-[1rem] leading-[1.55] text-[#91555a] md:text-[1.05rem]"
-                style={{ fontFamily: "var(--font-signal-cabinet-003-info)" }}
-              >
-                Keep scraps, scans, screenshots, and overheard phrases in motion until the hidden pattern starts naming itself.
-              </p>
-            </div>
-
-            <div
-              className="absolute right-[7.6%] bottom-[8.5%] flex flex-col items-end gap-2 text-right"
-              style={{ transform: `translate3d(${motion.backX * 1.3}px, ${motion.backY * 1.3}px, 0)` }}
-            >
-              <p
-                className="text-[0.68rem] font-semibold uppercase tracking-[0.24em] text-[#a15a5f]"
-                style={{ fontFamily: "var(--font-signal-cabinet-003-info)" }}
-              >
-                route / hold / release
-              </p>
-              <p
-                className="text-[2rem] font-semibold uppercase leading-[0.9] tracking-[-0.06em] text-[#cc2a36]"
-                style={{ fontFamily: "var(--font-signal-cabinet-003-display)" }}
-              >
-                pattern
-                <br />
-                pending
-              </p>
-            </div>
-          </article>
+          <div
+            aria-hidden
+            className="pointer-events-none absolute z-20 h-8 w-8 -translate-x-1/2 -translate-y-1/2 rounded-full border border-[#df2532]/80 bg-[#f6f2ef]/50 backdrop-blur-[2px] transition duration-150"
+            style={{
+              left: pointer.x,
+              top: pointer.y,
+              opacity: hovered ? 1 : 0,
+              transform: `translate(-50%, -50%) scale(${hovered ? 1 : 0.7})`,
+              boxShadow: hovered ? "0 0 0 10px rgba(223,37,50,0.08)" : "none",
+            }}
+          >
+            <div className="absolute left-1/2 top-1/2 h-1.5 w-1.5 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#df2532]" />
+          </div>
         </div>
       </div>
     </main>
