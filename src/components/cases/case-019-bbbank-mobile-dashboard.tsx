@@ -19,7 +19,13 @@ const spend = [
 ] as const;
 
 function Panel({ className, children }: { className?: string; children: React.ReactNode }) {
-  return <article className={`rounded-[1.9rem] p-5 shadow-[0_18px_30px_rgba(0,0,0,0.18)] ${className ?? ""}`}>{children}</article>;
+  return (
+    <article
+      className={`rounded-[1.9rem] p-5 shadow-[0_18px_30px_rgba(0,0,0,0.18)] transition duration-300 ease-out hover:-translate-y-1 hover:shadow-[0_24px_42px_rgba(0,0,0,0.24)] ${className ?? ""}`}
+    >
+      {children}
+    </article>
+  );
 }
 
 export function Case019BBBankMobileDashboard() {
@@ -52,7 +58,7 @@ export function Case019BBBankMobileDashboard() {
                 {days.map((day) => (
                   <span
                     key={day}
-                    className={`mx-auto flex h-9 w-9 items-center justify-center rounded-full ${day === 15 ? "bg-[#ff5a2b] text-black" : "text-white"}`}
+                    className={`mx-auto flex h-9 w-9 items-center justify-center rounded-full ${day === 15 ? "bg-[#ff5a2b] text-black [animation:mona-pulse-soft_2.8s_ease-in-out_infinite]" : "text-white transition duration-300 hover:bg-white/10"}`}
                   >
                     {day}
                   </span>
@@ -65,7 +71,11 @@ export function Case019BBBankMobileDashboard() {
               <p className="mt-5 max-w-[18ch] text-[1rem] leading-[1.1]">Calculated on average engagement, we use AI to get the numbers.</p>
               <div className="mt-8 grid h-40 grid-cols-12 items-end gap-2">
                 {Array.from({ length: 12 }, (_, index) => 30 + ((index * 17) % 68)).map((height, index) => (
-                  <span key={index} className="rounded-t-full bg-[#101010]" style={{ height: `${height}%` }} />
+                  <span
+                    key={index}
+                    className="origin-bottom rounded-t-full bg-[#101010] [animation:mona-bar-breathe_3.2s_ease-in-out_infinite]"
+                    style={{ height: `${height}%`, animationDelay: `${index * 120}ms` }}
+                  />
                 ))}
               </div>
             </Panel>
@@ -86,7 +96,8 @@ export function Case019BBBankMobileDashboard() {
               <div className="mt-5 flex items-center gap-3 text-[0.85rem] text-black/55">
                 <span>0</span>
                 <div className="relative h-2 flex-1 rounded-full bg-black/20">
-                  <span className="absolute left-[58%] top-1/2 h-4 w-4 -translate-x-1/2 -translate-y-1/2 rounded-full border-[3px] border-[#111] bg-[#f8ea2c]" />
+                  <span className="absolute inset-y-0 left-0 rounded-full bg-black/18 [animation:mona-marquee-glow_5s_ease-in-out_infinite]" style={{ width: '64%' }} />
+                  <span className="absolute top-1/2 h-4 w-4 -translate-x-1/2 -translate-y-1/2 rounded-full border-[3px] border-[#111] bg-[#f8ea2c] [animation:mona-progress-shift_4.8s_ease-in-out_infinite]" />
                 </div>
                 <span>500</span>
               </div>
@@ -127,7 +138,10 @@ export function Case019BBBankMobileDashboard() {
                     <div key={label} className="grid grid-cols-[auto_1fr] items-center gap-3">
                       <span className="text-[1rem] tracking-[-0.04em]">{label}</span>
                       <div className="h-1.5 rounded-full bg-black/12">
-                        <span className="block h-full rounded-full bg-[#101010]" style={{ width: `${ratio * 100}%` }} />
+                        <span
+                          className="block h-full rounded-full bg-[#101010] [animation:mona-marquee-glow_4.2s_ease-in-out_infinite]"
+                          style={{ width: `${ratio * 100}%`, animationDelay: `${ratio * 900}ms` }}
+                        />
                       </div>
                     </div>
                   ))}
@@ -158,12 +172,12 @@ export function Case019BBBankMobileDashboard() {
                 ))}
               </div>
               <div className="mt-4 space-y-3">
-                <div className="flex items-center justify-between rounded-full bg-[#eef2e7] px-5 py-3 text-[#111]">
-                  <span className="text-[1.8rem]">₿</span>
+                <div className="flex items-center justify-between rounded-full bg-[#eef2e7] px-5 py-3 text-[#111] transition duration-300 hover:translate-x-1">
+                  <span className="text-[1.8rem] [animation:mona-float_3.8s_ease-in-out_infinite]">₿</span>
                   <span className="text-[2rem] leading-none tracking-[-0.08em]">TRADE CRYPTO</span>
                 </div>
-                <div className="flex items-center justify-between rounded-full bg-[#ff5a2b] px-5 py-3 text-[#111]">
-                  <span className="text-[1.8rem]">#</span>
+                <div className="flex items-center justify-between rounded-full bg-[#ff5a2b] px-5 py-3 text-[#111] transition duration-300 hover:translate-x-1">
+                  <span className="text-[1.8rem] [animation:mona-float_3.8s_ease-in-out_infinite]" style={{ animationDelay: '180ms' }}>#</span>
                   <span className="text-[2rem] leading-none tracking-[-0.08em]">BANKWITHBBBANK</span>
                 </div>
               </div>

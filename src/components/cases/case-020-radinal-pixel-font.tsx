@@ -8,11 +8,18 @@ const lines = [
   ["RADINAL", "R", "(C) 2021"],
 ] as const;
 
+const decodeLines = [
+  "01010010 01000001 01000100 01001001 01001110 01000001 01001100",
+  "R4D1N4L // PIXEL FONT // GLYPH CACHE READY",
+  "[SCAN] [LOAD] [INDEX] [RENDER]",
+] as const;
+
 export function Case020RadinalPixelFont() {
   return (
     <main className="min-h-screen bg-[#b2b2b2] px-4 py-10 text-[#151515] sm:px-6 lg:px-10">
       <section className="mx-auto flex min-h-[calc(100vh-5rem)] max-w-[1120px] items-center justify-center">
         <article className="relative aspect-[1.25/1] w-full max-w-[760px] overflow-hidden bg-[#b2b2b2] px-4 py-6 sm:px-8 sm:py-8">
+          <div className="pointer-events-none absolute inset-x-0 top-0 z-20 h-16 bg-[linear-gradient(180deg,rgba(255,255,255,0.36),rgba(255,255,255,0))] [animation:mona-scanline_5.4s_linear_infinite]" />
           <div
             aria-hidden
             className="absolute left-1/2 top-1/2 h-[12rem] w-[17rem] -translate-x-1/2 -translate-y-[8%] rotate-[-8deg] blur-[1px] sm:h-[15rem] sm:w-[21rem]"
@@ -24,15 +31,22 @@ export function Case020RadinalPixelFont() {
             }}
           />
 
-          <div className="relative z-10 flex h-full flex-col justify-between font-mono uppercase tracking-[0.12em] text-[#161616]">
+          <div className="relative z-10 flex h-full flex-col justify-between font-mono uppercase tracking-[0.12em] text-[#161616] [animation:mona-flicker_6.2s_steps(1,end)_infinite]">
             <div className="space-y-3 text-[clamp(1.7rem,4vw,3rem)] leading-[0.88] sm:space-y-2">
               {lines.map((line, index) => (
-                <div key={index} className="flex flex-wrap items-baseline justify-between gap-x-5 gap-y-1">
+                <div key={index} className="relative flex flex-wrap items-baseline justify-between gap-x-5 gap-y-1 overflow-hidden">
                   {line.map((part) => (
-                    <span key={part} className={part === "REGULAR" ? "text-[#c63a18]" : ""}>
+                    <span key={part} className={part === "REGULAR" ? "text-[#c63a18] transition duration-300 hover:text-[#9a2208]" : "transition duration-300 hover:translate-x-0.5"}>
                       {part}
                     </span>
                   ))}
+                  <span
+                    aria-hidden
+                    className="pointer-events-none absolute inset-0 text-[#f3f3f3]/20 [animation:mona-decode_6.8s_steps(2,end)_infinite]"
+                    style={{ animationDelay: `${index * 220}ms` }}
+                  >
+                    {decodeLines[index % decodeLines.length]}
+                  </span>
                 </div>
               ))}
             </div>
