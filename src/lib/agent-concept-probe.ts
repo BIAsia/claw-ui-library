@@ -7,8 +7,8 @@ export const conceptProbe = {
   fixedConstraints: [
     "Single product concept shared across all three probes.",
     "Do not force the same page structure across styles.",
-    "The difference should come from information architecture, tone, and visual grammar.",
-    "Each result should still feel like a plausible public-facing website for the same product.",
+    "Preserve the original demo mode for each style instead of drifting into generic websites.",
+    "The difference should come from information architecture, tone, and visual grammar while staying recognizably anchored to the source demo.",
   ],
   desiredSignals: [
     "The website should make the product feel real, not like a style exercise.",

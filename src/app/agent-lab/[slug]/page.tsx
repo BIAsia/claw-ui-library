@@ -51,6 +51,11 @@ export default async function AgentStyleSpecPage({
 
         <section className="grid gap-4 xl:grid-cols-[0.95fr_1.05fr]">
           <div className="flex flex-col gap-4">
+            <section className="border border-white/10 bg-white/[0.03] p-5">
+              <p className="text-[0.68rem] uppercase tracking-[0.24em] text-white/42">locked mode</p>
+              <p className="mt-4 text-sm leading-7 text-white/88">{spec.lockedMode}</p>
+            </section>
+            <RuleList title="non-negotiables" items={spec.nonNegotiables} />
             <RuleList title="visual rules" items={spec.visualRules} />
             <RuleList title="component rules" items={spec.componentRules} />
             <RuleList title="page constraints" items={spec.pageConstraints} />
