@@ -6,8 +6,11 @@ import Link from "next/link";
 const programme = {
   talks: {
     label: "Talks",
-    kicker: "Main Stage / live broadcast",
-    accent: "#f4cf5b",
+    kicker: "Main stage / live broadcast",
+    accent: "#ffcf33",
+    panel: "#fff1b1",
+    ink: "#231800",
+    stamp: "LOUD ROOM",
     intro: "Big-room sessions for design systems, creative tooling, moving-image craft, and the awkward politics of originality.",
     items: [
       { time: "10:00", title: "After the Moodboard", meta: "Ari Vale · Hall Orbit", note: "How teams move from references to authored visual grammar." },
@@ -18,7 +21,10 @@ const programme = {
   workshops: {
     label: "Workshops",
     kicker: "Hands-on / limited seats",
-    accent: "#7be0c3",
+    accent: "#14d89a",
+    panel: "#bbffe7",
+    ink: "#002518",
+    stamp: "MAKE THINGS",
     intro: "Small rooms, active making, and practical sessions designed for teams who want new methods rather than inspiration alone.",
     items: [
       { time: "11:00", title: "Typography for Dense Interfaces", meta: "Studio Vanta · Lab 2", note: "Turn hard hierarchies and long data labels into elegant systems." },
@@ -29,7 +35,10 @@ const programme = {
   installations: {
     label: "Installations",
     kicker: "Open all day / city spread",
-    accent: "#f08b67",
+    accent: "#ff6f3b",
+    panel: "#ffd0c0",
+    ink: "#331105",
+    stamp: "AFTER DARK",
     intro: "Screenings, demo chambers, public prototypes, and one-night interventions threaded through the district.",
     items: [
       { time: "All day", title: "Signal Forest", meta: "Pier Warehouse", note: "Reactive light canopy shaped by the festival audio archive." },
@@ -40,7 +49,10 @@ const programme = {
   city: {
     label: "City Map",
     kicker: "Walkable clusters / hospitality",
-    accent: "#d8c5ff",
+    accent: "#7e6bff",
+    panel: "#d9d1ff",
+    ink: "#190f47",
+    stamp: "MOVE FAST",
     intro: "Use the venue layer to plan your route between talks, workshops, food breaks, and late screenings without dropping context.",
     items: [
       { time: "Cluster A", title: "Harbour Stage", meta: "Talks / screenings / badge desk", note: "Primary hub with transit stop, lockers, and festival radio booth." },
@@ -51,7 +63,10 @@ const programme = {
   tickets: {
     label: "Tickets",
     kicker: "Passes / access / planning",
-    accent: "#ffffff",
+    accent: "#ff4fb0",
+    panel: "#ffd0eb",
+    ink: "#3a0723",
+    stamp: "GET IN",
     intro: "Fast booking overview for full-week, day, and night-route access, plus what each badge unlocks across the programme.",
     items: [
       { time: "Full pass", title: "Week access", meta: "¥780 · all tracks", note: "Includes talks, installations, city map concierge, and one workshop priority window." },
@@ -69,36 +84,38 @@ export default function DadFestivalTabsFestivalHubPage() {
   const activePanel = useMemo(() => programme[activeTab], [activeTab]);
 
   return (
-    <main className="min-h-screen bg-[#11111a] px-3 py-3 text-white sm:px-5 lg:px-8">
-      <section className="mx-auto flex min-h-[calc(100vh-1.5rem)] max-w-[1240px] items-center justify-center">
-        <article className="relative w-full overflow-hidden rounded-[32px] border border-white/10 bg-[#171724] shadow-[0_40px_120px_rgba(0,0,0,0.42)]">
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(244,207,91,0.16),transparent_24%),radial-gradient(circle_at_82%_18%,rgba(123,224,195,0.12),transparent_24%),linear-gradient(180deg,rgba(255,255,255,0.03),transparent_28%)]" />
-          <div className="absolute inset-0 opacity-[0.12] [background-image:linear-gradient(rgba(255,255,255,0.15)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.08)_1px,transparent_1px)] [background-size:100%_6.2rem,6.2rem_100%]" />
+    <main className="min-h-screen bg-[#f5ecd8] px-3 py-3 text-[#17130f] sm:px-4 lg:px-6">
+      <section className="mx-auto flex min-h-[calc(100vh-1.5rem)] max-w-[1320px] items-center justify-center">
+        <article className="relative w-full overflow-hidden border-[3px] border-[#17130f] bg-[#fff7e8] shadow-[0_30px_110px_rgba(47,29,11,0.18)]">
+          <div className="absolute inset-0 opacity-[0.1] [background-image:linear-gradient(rgba(23,19,15,0.2)_1px,transparent_1px),linear-gradient(90deg,rgba(23,19,15,0.16)_1px,transparent_1px)] [background-size:100%_5.4rem,5.4rem_100%]" />
+          <div className="absolute inset-x-0 top-0 h-3 bg-[#17130f]" />
+          <div className="absolute inset-x-0 bottom-0 h-3 bg-[#17130f]" />
 
           <div className="relative z-10 px-5 py-5 sm:px-7 sm:py-7 lg:px-8 lg:py-8">
-            <header className="grid gap-6 border-b border-white/10 pb-6 lg:grid-cols-[1.1fr_0.9fr]">
+            <header className="grid gap-6 border-b-[3px] border-[#17130f] pb-6 lg:grid-cols-[1.05fr_0.95fr]">
               <div>
-                <p className="text-[0.72rem] uppercase tracking-[0.34em] text-white/44">Signals Festival / programme hub / 14–18 May 2026</p>
-                <h1 className="mt-3 max-w-[12ch] text-[clamp(3rem,6vw,5.4rem)] font-semibold uppercase leading-[0.86] tracking-[-0.08em] text-white">
-                  Festival Hub
-                </h1>
-                <p className="mt-4 max-w-[42rem] text-sm leading-7 text-white/70 sm:text-[15px]">
-                  One tab set, five distinct slices of the same festival week. Move between talks, workshops, installations, routes, and passes without collapsing into a long-scroll brochure.
+                <p className="text-[0.72rem] font-semibold uppercase tracking-[0.34em] text-[#6c5744]">Signals festival / programme sheet / 14–18 May 2026</p>
+                <h1 className="mt-3 max-w-[10ch] text-[clamp(3.2rem,7vw,6rem)] font-semibold uppercase leading-[0.82] tracking-[-0.1em] text-[#17130f]">Festival Hub</h1>
+                <p className="mt-4 max-w-[42rem] text-sm leading-7 text-[#4b3a2b] sm:text-[15px]">
+                  Saturated tabs, printed-programme framing, and loud category cues turn a normal tab surface into something closer to a folded festival bulletin.
                 </p>
               </div>
 
-              <div className="flex flex-col justify-between gap-4 rounded-[26px] border border-white/10 bg-white/[0.03] p-5">
-                <div>
-                  <p className="text-[0.68rem] uppercase tracking-[0.28em] text-white/42">Now previewing</p>
-                  <p className="mt-3 text-3xl font-semibold tracking-[-0.06em] text-white">{activePanel.label}</p>
-                  <p className="mt-2 text-sm leading-6 text-white/64">{activePanel.kicker}</p>
+              <div className="grid gap-3 self-end sm:grid-cols-3">
+                <div className="border-2 border-[#17130f] bg-[#ffcf33] p-4">
+                  <p className="text-[0.66rem] font-semibold uppercase tracking-[0.28em] text-[#231800]/55">Now previewing</p>
+                  <p className="mt-3 text-3xl font-semibold uppercase tracking-[-0.06em] text-[#231800]">{activePanel.label}</p>
                 </div>
-                <div className="flex flex-wrap gap-3 text-[0.72rem] uppercase tracking-[0.24em] text-white/62">
-                  <Link href="/agent-probe/dad-festival-tabs" className="border border-white/14 px-3 py-2 transition hover:border-white/32 hover:text-white">
-                    Family page
+                <div className="border-2 border-[#17130f] bg-[#17130f] p-4 text-[#fff7e8]">
+                  <p className="text-[0.66rem] font-semibold uppercase tracking-[0.28em] text-[#fff7e8]/54">Tab marker</p>
+                  <p className="mt-3 text-sm font-semibold uppercase tracking-[0.18em]">{activePanel.stamp}</p>
+                </div>
+                <div className="border-2 border-[#17130f] bg-[#fff7e8] p-4 text-[0.66rem] font-semibold uppercase tracking-[0.24em] text-[#4b3a2b]">
+                  <Link href="/agent-probe/dad-festival-tabs" className="block border-b border-[#17130f] pb-2 hover:text-[#17130f]">
+                    Family page ↗
                   </Link>
-                  <Link href="/agent-probe" className="border border-white/14 px-3 py-2 transition hover:border-white/32 hover:text-white">
-                    Agent probe index
+                  <Link href="/agent-probe" className="mt-2 block hover:text-[#17130f]">
+                    Probe index ↗
                   </Link>
                 </div>
               </div>
@@ -115,79 +132,78 @@ export default function DadFestivalTabsFestivalHubPage() {
                         key={key}
                         type="button"
                         onClick={() => setActiveTab(key)}
-                        className={`group min-w-[160px] rounded-[24px] border px-4 py-4 text-left transition duration-300 ease-out lg:min-w-0 ${
-                          isActive ? "border-white/20 bg-white/[0.08] text-white" : "border-white/10 bg-white/[0.02] text-white/62 hover:border-white/20 hover:text-white"
-                        }`}
+                        className="group min-w-[170px] border-[3px] border-[#17130f] px-4 py-4 text-left transition duration-200 ease-out lg:min-w-0"
+                        style={{ backgroundColor: isActive ? tab.accent : "#fff7e8", color: isActive ? tab.ink : "#17130f" }}
                       >
                         <div className="flex items-start justify-between gap-4">
                           <div>
-                            <p className="text-[0.64rem] uppercase tracking-[0.28em] text-white/42">0{index + 1}</p>
-                            <p className="mt-2 text-xl font-semibold tracking-[-0.05em]">{tab.label}</p>
+                            <p className="text-[0.64rem] font-semibold uppercase tracking-[0.28em] opacity-60">0{index + 1}</p>
+                            <p className="mt-2 text-xl font-semibold uppercase tracking-[-0.05em]">{tab.label}</p>
                           </div>
-                          <span className="mt-1 h-3 w-3 rounded-full" style={{ backgroundColor: tab.accent }} />
+                          <span className="border-2 border-current px-2 py-1 text-[0.56rem] font-semibold uppercase tracking-[0.24em]">*</span>
                         </div>
-                        <p className="mt-3 text-sm leading-6 text-inherit/80">{tab.kicker}</p>
+                        <p className="mt-3 text-sm leading-6 opacity-82">{tab.kicker}</p>
                       </button>
                     );
                   })}
                 </div>
               </nav>
 
-              <div className="min-w-0 flex-1 rounded-[28px] border border-white/10 bg-[#11131d] p-5 sm:p-6">
-                <div className="grid gap-5 border-b border-white/10 pb-5 lg:grid-cols-[1.1fr_0.9fr]">
+              <div className="min-w-0 flex-1 border-[3px] border-[#17130f] bg-[#fff7e8] p-5 sm:p-6" style={{ boxShadow: `inset 0 0 0 8px ${activePanel.accent}` }}>
+                <div className="grid gap-5 border-b-2 border-dashed border-[#17130f] pb-5 lg:grid-cols-[1.1fr_0.9fr]">
                   <div>
-                    <p className="text-[0.68rem] uppercase tracking-[0.28em] text-white/42">{activePanel.kicker}</p>
-                    <h2 className="mt-3 text-[clamp(2.2rem,4vw,3.6rem)] font-semibold tracking-[-0.07em] text-white">{activePanel.label}</h2>
-                    <p className="mt-3 max-w-[42rem] text-sm leading-7 text-white/72 sm:text-[15px]">{activePanel.intro}</p>
+                    <p className="text-[0.68rem] font-semibold uppercase tracking-[0.28em] text-[#6b5847]">{activePanel.kicker}</p>
+                    <h2 className="mt-3 text-[clamp(2.2rem,4vw,3.9rem)] font-semibold uppercase tracking-[-0.08em] text-[#17130f]">{activePanel.label}</h2>
+                    <p className="mt-3 max-w-[42rem] text-sm leading-7 text-[#4f3c2c] sm:text-[15px]">{activePanel.intro}</p>
                   </div>
-                  <div className="rounded-[24px] border border-white/10 p-5">
-                    <p className="text-[0.68rem] uppercase tracking-[0.28em] text-white/42">Section status</p>
-                    <div className="mt-4 flex items-end gap-4">
-                      <p className="text-5xl font-semibold tracking-[-0.08em] text-white">{activePanel.items.length}</p>
-                      <p className="pb-1 text-sm leading-6 text-white/62">scheduled highlights in this tab pane right now</p>
+                  <div className="grid gap-3 sm:grid-cols-2">
+                    <div className="border-2 border-[#17130f] p-4" style={{ backgroundColor: activePanel.panel, color: activePanel.ink }}>
+                      <p className="text-[0.66rem] font-semibold uppercase tracking-[0.28em] opacity-56">Section status</p>
+                      <p className="mt-3 text-5xl font-semibold leading-none tracking-[-0.08em]">{activePanel.items.length}</p>
+                      <p className="mt-2 text-sm leading-6 opacity-80">highlights in this printed tab pane</p>
                     </div>
-                    <div className="mt-4 h-2 rounded-full bg-white/8">
-                      <div className="h-full rounded-full transition-all duration-500" style={{ width: `${(tabKeys.indexOf(activeTab) + 1) * 18}%`, backgroundColor: activePanel.accent }} />
+                    <div className="border-2 border-[#17130f] bg-[#17130f] p-4 text-[#fff7e8]">
+                      <p className="text-[0.66rem] font-semibold uppercase tracking-[0.28em] text-[#fff7e8]/52">Festival pulse</p>
+                      <p className="mt-3 text-2xl font-semibold uppercase tracking-[-0.06em]">12 venues</p>
+                      <p className="mt-2 text-sm leading-6 text-[#eadfca]">Talks, labs, projection walls, ferry link, and late route signage.</p>
                     </div>
                   </div>
                 </div>
 
                 <div className="mt-5 grid gap-4 xl:grid-cols-[1.15fr_0.85fr]">
                   <div className="space-y-4">
-                    {activePanel.items.map((item) => (
-                      <article key={item.title} className="grid gap-4 rounded-[22px] border border-white/10 bg-white/[0.03] p-4 sm:grid-cols-[120px_1fr]">
-                        <div>
-                          <p className="text-[0.68rem] uppercase tracking-[0.28em] text-white/42">time</p>
-                          <p className="mt-2 text-2xl font-semibold tracking-[-0.06em] text-white">{item.time}</p>
+                    {activePanel.items.map((item, index) => (
+                      <article key={item.title} className="grid gap-4 border-2 border-[#17130f] bg-[#fffdf5] p-4 sm:grid-cols-[130px_1fr]">
+                        <div className="border-b-2 border-dashed border-[#17130f] pb-3 sm:border-b-0 sm:border-r-2 sm:pb-0 sm:pr-4">
+                          <p className="text-[0.62rem] font-semibold uppercase tracking-[0.28em] text-[#715a48]">slot 0{index + 1}</p>
+                          <p className="mt-2 text-2xl font-semibold uppercase tracking-[-0.06em] text-[#17130f]">{item.time}</p>
+                          <p className="mt-3 text-[0.62rem] font-semibold uppercase tracking-[0.28em] text-[#715a48]">— — —</p>
                         </div>
                         <div>
                           <div className="flex flex-wrap items-center gap-3">
-                            <h3 className="text-2xl font-semibold tracking-[-0.05em] text-white">{item.title}</h3>
-                            <span className="inline-flex rounded-full border border-white/12 px-3 py-1 text-[0.64rem] uppercase tracking-[0.24em] text-white/54">{item.meta}</span>
+                            <h3 className="text-2xl font-semibold uppercase tracking-[-0.05em] text-[#17130f]">{item.title}</h3>
+                            <span className="inline-flex border-2 border-[#17130f] px-3 py-1 text-[0.62rem] font-semibold uppercase tracking-[0.24em] text-[#574434]">{item.meta}</span>
                           </div>
-                          <p className="mt-3 max-w-[42rem] text-sm leading-7 text-white/72">{item.note}</p>
+                          <p className="mt-3 max-w-[42rem] text-sm leading-7 text-[#4f3c2c]">{item.note}</p>
                         </div>
                       </article>
                     ))}
                   </div>
 
                   <aside className="space-y-4">
-                    <div className="rounded-[24px] border border-white/10 bg-white/[0.03] p-5">
-                      <p className="text-[0.68rem] uppercase tracking-[0.28em] text-white/42">Festival pulse</p>
-                      <p className="mt-3 text-4xl font-semibold tracking-[-0.08em] text-white">12 venues</p>
-                      <p className="mt-2 text-sm leading-6 text-white/68">Walkable clusters connected by harbour ferry, tram loop, and late-night shuttle.</p>
-                    </div>
-                    <div className="rounded-[24px] border border-white/10 bg-white/[0.03] p-5">
-                      <p className="text-[0.68rem] uppercase tracking-[0.28em] text-white/42">Fast planner</p>
-                      <ul className="mt-4 space-y-3 text-sm leading-6 text-white/72">
-                        <li>• Pin one anchor event before noon and one after sunset.</li>
-                        <li>• Pair a seated talk with a standing installation to reset attention.</li>
-                        <li>• Leave 20 minutes between Lab Quarter and Harbour Stage.</li>
+                    <div className="border-2 border-[#17130f] p-5" style={{ backgroundColor: activePanel.accent, color: activePanel.ink }}>
+                      <p className="text-[0.66rem] font-semibold uppercase tracking-[0.28em] opacity-58">Fast planner</p>
+                      <ul className="mt-4 space-y-3 text-sm leading-6 opacity-90">
+                        <li>* pick one anchor event before noon.</li>
+                        <li>* pair a seated room with a standing installation.</li>
+                        <li>* leave twenty minutes between harbour and lab quarter.</li>
                       </ul>
                     </div>
-                    <div className="rounded-[24px] border border-white/10 bg-[#f4cf5b] p-5 text-[#171724]">
-                      <p className="text-[0.68rem] uppercase tracking-[0.28em] text-[#171724]/54">Need a route?</p>
-                      <p className="mt-3 text-2xl font-semibold tracking-[-0.05em]">Build a one-day path from any tab and keep context while you switch.</p>
+                    <div className="border-2 border-[#17130f] bg-[#fffdf5] p-5">
+                      <p className="text-[0.66rem] font-semibold uppercase tracking-[0.28em] text-[#715a48]">Printed programme feel</p>
+                      <p className="mt-3 text-[1.12rem] leading-8 tracking-[-0.04em] text-[#17130f]">
+                        Bold rules, tab colour coding, and little stamps make the interface feel like something folded into your pocket at the badge desk.
+                      </p>
                     </div>
                   </aside>
                 </div>
