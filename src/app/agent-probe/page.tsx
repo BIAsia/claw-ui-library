@@ -1,6 +1,30 @@
 import Link from "next/link";
 import { conceptProbe } from "@/lib/agent-concept-probe";
 import { traditionalAgentConcept } from "@/lib/traditional-agent-concept-probe";
+import { case029StyleFamily } from "@/lib/case-029-style-family";
+import { case019StyleFamily } from "@/lib/case-019-style-family";
+import { case020StyleFamily } from "@/lib/case-020-style-family";
+import { case021StyleFamily } from "@/lib/case-021-style-family";
+import { case024StyleFamily } from "@/lib/case-024-style-family";
+import { case027StyleFamily } from "@/lib/case-027-style-family";
+import { case028StyleFamily } from "@/lib/case-028-style-family";
+import { case001StyleFamily } from "@/lib/case-001-style-family";
+import { case002StyleFamily } from "@/lib/case-002-style-family";
+import { case006StyleFamily } from "@/lib/case-006-style-family";
+import { case009StyleFamily } from "@/lib/case-009-style-family";
+import { case010StyleFamily } from "@/lib/case-010-style-family";
+import { case011StyleFamily } from "@/lib/case-011-style-family";
+import { case012StyleFamily } from "@/lib/case-012-style-family";
+import { case013StyleFamily } from "@/lib/case-013-style-family";
+import { case014StyleFamily } from "@/lib/case-014-style-family";
+import { case015StyleFamily } from "@/lib/case-015-style-family";
+import { case016StyleFamily } from "@/lib/case-016-style-family";
+import { case017StyleFamily } from "@/lib/case-017-style-family";
+import { case018StyleFamily } from "@/lib/case-018-style-family";
+import { case022StyleFamily } from "@/lib/case-022-style-family";
+import { case023StyleFamily } from "@/lib/case-023-style-family";
+import { case025StyleFamily } from "@/lib/case-025-style-family";
+import { case026StyleFamily } from "@/lib/case-026-style-family";
 
 const concepts = [
   {
@@ -18,6 +42,198 @@ const concepts = [
     summary: traditionalAgentConcept.summary,
     fixedConstraints: traditionalAgentConcept.fixedConstraints,
     desiredSignals: traditionalAgentConcept.desiredSignals,
+  },
+  {
+    route: "/agent-probe/zina-gallery-poster",
+    name: case029StyleFamily.name,
+    tagline: case029StyleFamily.tagline,
+    summary: case029StyleFamily.summary,
+    fixedConstraints: case029StyleFamily.fixedConstraints,
+    desiredSignals: case029StyleFamily.desiredSignals,
+  },
+  {
+    route: "/agent-probe/bbbank-finance-cockpit",
+    name: case019StyleFamily.name,
+    tagline: case019StyleFamily.tagline,
+    summary: case019StyleFamily.summary,
+    fixedConstraints: case019StyleFamily.fixedConstraints,
+    desiredSignals: case019StyleFamily.desiredSignals,
+  },
+  {
+    route: "/agent-probe/radinal-pixel-font",
+    name: case020StyleFamily.name,
+    tagline: case020StyleFamily.tagline,
+    summary: case020StyleFamily.summary,
+    fixedConstraints: case020StyleFamily.fixedConstraints,
+    desiredSignals: case020StyleFamily.desiredSignals,
+  },
+  {
+    route: "/agent-probe/mercat-error-404",
+    name: case022StyleFamily.name,
+    tagline: case022StyleFamily.tagline,
+    summary: case022StyleFamily.summary,
+    fixedConstraints: case022StyleFamily.fixedConstraints,
+    desiredSignals: case022StyleFamily.desiredSignals,
+  },
+  {
+    route: "/agent-probe/cookie-cutter-poster",
+    name: case023StyleFamily.name,
+    tagline: case023StyleFamily.tagline,
+    summary: case023StyleFamily.summary,
+    fixedConstraints: case023StyleFamily.fixedConstraints,
+    desiredSignals: case023StyleFamily.desiredSignals,
+  },
+  {
+    route: "/agent-probe/dad-festival-tabs",
+    name: case025StyleFamily.name,
+    tagline: case025StyleFamily.tagline,
+    summary: case025StyleFamily.summary,
+    fixedConstraints: case025StyleFamily.fixedConstraints,
+    desiredSignals: case025StyleFamily.desiredSignals,
+  },
+  {
+    route: "/agent-probe/ideas-change-cards",
+    name: case026StyleFamily.name,
+    tagline: case026StyleFamily.tagline,
+    summary: case026StyleFamily.summary,
+    fixedConstraints: case026StyleFamily.fixedConstraints,
+    desiredSignals: case026StyleFamily.desiredSignals,
+  },
+  {
+    route: "/agent-probe/cygnito-mono-poster",
+    name: case021StyleFamily.name,
+    tagline: case021StyleFamily.tagline,
+    summary: case021StyleFamily.summary,
+    fixedConstraints: case021StyleFamily.fixedConstraints,
+    desiredSignals: case021StyleFamily.desiredSignals,
+  },
+  {
+    route: "/agent-probe/radiiio-station-table",
+    name: case024StyleFamily.name,
+    tagline: case024StyleFamily.tagline,
+    summary: case024StyleFamily.summary,
+    fixedConstraints: case024StyleFamily.fixedConstraints,
+    desiredSignals: case024StyleFamily.desiredSignals,
+  },
+  {
+    route: "/agent-probe/gdansk-literature-system",
+    name: case027StyleFamily.name,
+    tagline: case027StyleFamily.tagline,
+    summary: case027StyleFamily.summary,
+    fixedConstraints: case027StyleFamily.fixedConstraints,
+    desiredSignals: case027StyleFamily.desiredSignals,
+  },
+  {
+    route: "/agent-probe/ukrainian-power-hero",
+    name: case028StyleFamily.name,
+    tagline: case028StyleFamily.tagline,
+    summary: case028StyleFamily.summary,
+    fixedConstraints: case028StyleFamily.fixedConstraints,
+    desiredSignals: case028StyleFamily.desiredSignals,
+  },
+  {
+    route: "/agent-probe/always-beginning",
+    name: case001StyleFamily.name,
+    tagline: case001StyleFamily.tagline,
+    summary: case001StyleFamily.summary,
+    fixedConstraints: case001StyleFamily.fixedConstraints,
+    desiredSignals: case001StyleFamily.desiredSignals,
+  },
+  {
+    route: "/agent-probe/with-palestine",
+    name: case002StyleFamily.name,
+    tagline: case002StyleFamily.tagline,
+    summary: case002StyleFamily.summary,
+    fixedConstraints: case002StyleFamily.fixedConstraints,
+    desiredSignals: case002StyleFamily.desiredSignals,
+  },
+  {
+    route: "/agent-probe/de-school-grid",
+    name: case006StyleFamily.name,
+    tagline: case006StyleFamily.tagline,
+    summary: case006StyleFamily.summary,
+    fixedConstraints: case006StyleFamily.fixedConstraints,
+    desiredSignals: case006StyleFamily.desiredSignals,
+  },
+  {
+    route: "/agent-probe/project-timeline",
+    name: case009StyleFamily.name,
+    tagline: case009StyleFamily.tagline,
+    summary: case009StyleFamily.summary,
+    fixedConstraints: case009StyleFamily.fixedConstraints,
+    desiredSignals: case009StyleFamily.desiredSignals,
+  },
+  {
+    route: "/agent-probe/dev-agency-hero",
+    name: case010StyleFamily.name,
+    tagline: case010StyleFamily.tagline,
+    summary: case010StyleFamily.summary,
+    fixedConstraints: case010StyleFamily.fixedConstraints,
+    desiredSignals: case010StyleFamily.desiredSignals,
+  },
+  {
+    route: "/agent-probe/won-soju-bands",
+    name: case011StyleFamily.name,
+    tagline: case011StyleFamily.tagline,
+    summary: case011StyleFamily.summary,
+    fixedConstraints: case011StyleFamily.fixedConstraints,
+    desiredSignals: case011StyleFamily.desiredSignals,
+  },
+  {
+    route: "/agent-probe/worth-saving-chips",
+    name: case012StyleFamily.name,
+    tagline: case012StyleFamily.tagline,
+    summary: case012StyleFamily.summary,
+    fixedConstraints: case012StyleFamily.fixedConstraints,
+    desiredSignals: case012StyleFamily.desiredSignals,
+  },
+  {
+    route: "/agent-probe/swagworks-hero",
+    name: case013StyleFamily.name,
+    tagline: case013StyleFamily.tagline,
+    summary: case013StyleFamily.summary,
+    fixedConstraints: case013StyleFamily.fixedConstraints,
+    desiredSignals: case013StyleFamily.desiredSignals,
+  },
+  {
+    route: "/agent-probe/tag-cluster",
+    name: case014StyleFamily.name,
+    tagline: case014StyleFamily.tagline,
+    summary: case014StyleFamily.summary,
+    fixedConstraints: case014StyleFamily.fixedConstraints,
+    desiredSignals: case014StyleFamily.desiredSignals,
+  },
+  {
+    route: "/agent-probe/impact-card",
+    name: case015StyleFamily.name,
+    tagline: case015StyleFamily.tagline,
+    summary: case015StyleFamily.summary,
+    fixedConstraints: case015StyleFamily.fixedConstraints,
+    desiredSignals: case015StyleFamily.desiredSignals,
+  },
+  {
+    route: "/agent-probe/adoption-dots",
+    name: case016StyleFamily.name,
+    tagline: case016StyleFamily.tagline,
+    summary: case016StyleFamily.summary,
+    fixedConstraints: case016StyleFamily.fixedConstraints,
+    desiredSignals: case016StyleFamily.desiredSignals,
+  },
+  {
+    route: "/agent-probe/circuit-identity",
+    name: case017StyleFamily.name,
+    tagline: case017StyleFamily.tagline,
+    summary: case017StyleFamily.summary,
+    fixedConstraints: case017StyleFamily.fixedConstraints,
+    desiredSignals: case017StyleFamily.desiredSignals,
+  },
+  {
+    route: "/agent-probe/mux-signal-grid",
+    name: case018StyleFamily.name,
+    tagline: case018StyleFamily.tagline,
+    summary: case018StyleFamily.summary,
+    fixedConstraints: case018StyleFamily.fixedConstraints,
+    desiredSignals: case018StyleFamily.desiredSignals,
   },
 ] as const;
 
