@@ -25,6 +25,11 @@ import { Case026IdeasChangeCards } from "@/components/cases/case-026-ideas-chang
 import { Case027GdanskLiteratureSystem } from "@/components/cases/case-027-gdansk-literature-system";
 import { Case028UkrainianPowerHero } from "@/components/cases/case-028-ukrainian-power-hero";
 import { Case029ZinaGalleryPoster } from "@/components/cases/case-029-zina-gallery-poster";
+import { Case030EditorialManifesto } from "@/components/cases/case-030-editorial-manifesto";
+import { Case031TypeSpecimenShowcase } from "@/components/cases/case-031-type-specimen-showcase";
+import { Case032SaasDashboardMetrics } from "@/components/cases/case-032-saas-dashboard-metrics";
+import { Case033SplitPanelCampaign } from "@/components/cases/case-033-split-panel-campaign";
+import { Case034DirectoryIndexSurface } from "@/components/cases/case-034-directory-index-surface";
 
 const caseRegistry: Record<string, () => React.ReactNode> = {
   "case-001-beginning": () => <Case001Beginning />,
@@ -54,6 +59,11 @@ const caseRegistry: Record<string, () => React.ReactNode> = {
   "case-027-gdansk-literature-system": () => <Case027GdanskLiteratureSystem />,
   "case-028-ukrainian-power-hero": () => <Case028UkrainianPowerHero />,
   "case-029-zina-gallery-poster": () => <Case029ZinaGalleryPoster />,
+  "case-030-editorial-manifesto": () => <Case030EditorialManifesto />,
+  "case-031-type-specimen-showcase": () => <Case031TypeSpecimenShowcase />,
+  "case-032-saas-dashboard-metrics": () => <Case032SaasDashboardMetrics />,
+  "case-033-split-panel-campaign": () => <Case033SplitPanelCampaign />,
+  "case-034-directory-index-surface": () => <Case034DirectoryIndexSurface />,
 };
 
 export function renderCase(slug: string) {
